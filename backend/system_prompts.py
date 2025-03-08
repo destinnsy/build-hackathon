@@ -70,7 +70,7 @@ You are an expert at analyzing problem statements and identifying potential red 
 Return your analysis as a JSON object with the following structure:
 {{ 
   "evaluation": "good" or "bad",
-  "redFlags": ["list", "of", "violated", "red", "flags"] or [],
+  "redFlags": list of red flags that were found ["solution_focus", "insufficient_depth", "multiple_distinct_problems"] or [],
   "analysis": "Your detailed explanation of the reasoning behind your evaluation"
 }}
 
