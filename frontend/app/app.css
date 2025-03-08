@@ -136,3 +136,22 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+/* Make inputs taller when they're textareas */
+input.min-h-\[100px\] {
+  height: 100px;
+  align-items: start;
+  padding-top: 12px;
+}
