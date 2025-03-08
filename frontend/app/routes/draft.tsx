@@ -2,8 +2,29 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 export default function Draft() {
+  const [problemStatement, setProblemStatement] = useState("");
+
+  const handleAssessment = async () => {
+    console.log("Backend URL:", import.meta.env.VITE_BACKEND_URL);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // body: JSON.stringify({ text: problemStatement }),
+      });
+
+      const data = await response.json();
+      console.log("Assessment result:", data);
+    } catch (error) {
+      console.error("Error assessing problem statement:", error);
+    }
+  };
+
   return (
     <div className="container p-6">
       <h1 className="text-2xl font-bold mb-6">
@@ -44,7 +65,11 @@ export default function Draft() {
                     3. What is the target audience?
                   </h3>
                   <div className="flex gap-2">
-                    <Button variant="ghost" size="sm">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleAssessment}
+                    >
                       Assess Problem Statement
                     </Button>
                     <Button variant="ghost" size="sm">
@@ -55,6 +80,8 @@ export default function Draft() {
                 <Textarea
                   className="min-h-[500px]"
                   placeholder="Placeholder text"
+                  value={problemStatement}
+                  onChange={(e) => setProblemStatement(e.target.value)}
                 />
               </div>
             </div>

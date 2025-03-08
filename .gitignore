@@ -9,3 +9,4 @@
 # React Router
 /frontend/.react-router/
 /frontend/build/
+/frontend/.env

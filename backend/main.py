@@ -2,8 +2,18 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import json
 from llm import analyze_problem_statement, analyze_problem_size, analyze_target_audience
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/")
 def read_root():
