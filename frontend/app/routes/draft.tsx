@@ -12,7 +12,7 @@ export default function Draft() {
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl text-blue-500 font-semibold">
-              2.1 Status Quo
+              Problem Statement
             </h2>
             <div className="flex gap-2">
               <Button
@@ -35,12 +35,16 @@ export default function Draft() {
             <div className="space-y-4">
               <div>
                 <h3 className="text-blue-500 mb-2">
-                  2.1.1 What problem is being solved?
+                  1. What is the problem statement?
+                  <br />
+                  2. What is the size of the problem statement?
+                  <br />
+                  3. What is the target audience?
                 </h3>
                 <div className="relative">
                   <Input
                     className="min-h-[100px]"
-                    placeholder="[Organization name] currently faces challenges with [specific process/system], resulting in [negative outcomes like inefficiency, high costs, errors, etc.]."
+                    placeholder="Placeholder text"
                   />
                   <div className="absolute right-2 top-2 flex gap-2">
                     <Button variant="ghost" size="sm">
