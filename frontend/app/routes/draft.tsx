@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Draft() {
   return (
@@ -34,27 +35,27 @@ export default function Draft() {
           <Card className="p-4">
             <div className="space-y-4">
               <div>
-                <h3 className="text-blue-500 mb-2">
-                  1. What is the problem statement?
-                  <br />
-                  2. What is the size of the problem statement?
-                  <br />
-                  3. What is the target audience?
-                </h3>
-                <div className="relative">
-                  <Input
-                    className="min-h-[100px]"
-                    placeholder="Placeholder text"
-                  />
-                  <div className="absolute right-2 top-2 flex gap-2">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-blue-500">
+                    1. What is the problem statement?
+                    <br />
+                    2. What is the size of the problem statement?
+                    <br />
+                    3. What is the target audience?
+                  </h3>
+                  <div className="flex gap-2">
                     <Button variant="ghost" size="sm">
-                      Improve with AI Composer
+                      Assess Problem Statement
                     </Button>
                     <Button variant="ghost" size="sm">
                       Copy
                     </Button>
                   </div>
                 </div>
+                <Textarea
+                  className="min-h-[500px]"
+                  placeholder="Placeholder text"
+                />
               </div>
             </div>
           </Card>
