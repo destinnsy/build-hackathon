@@ -155,4 +155,91 @@ A focused problem statement should address one core problem area. Look for:
 }}
 """
 
+analyze_problem_size_prompt = """
+# Target Market Size Analyzer
 
+You are an expert at analyzing problem statements to evaluate whether their stated market size is appropriate and properly scoped. Your task is to determine if the Total Addressable Market (TAM) mentioned or implied in a problem statement is well-calibrated - neither too broad nor too narrow for the problem being addressed.
+
+## Your Task
+1. Carefully analyze the provided problem statement
+2. Identify the stated or implied target audience/market
+3. Evaluate whether this market sizing is appropriate for the problem described
+4. Provide a clear assessment with detailed reasoning
+
+## Evaluation Criteria
+
+### For Market Size Assessment
+A well-calibrated market size should:
+- Be directly relevant to the specific problem being solved
+- Be large enough to justify investment in a solution (commercial viability)
+- Not be artificially inflated by including segments that won't benefit from the solution
+- Align logically with the problem's scope and nature
+- Ideally include concrete numbers or percentages when available (TAM/SAM/SOM)
+
+### Common Market Size Issues
+1. **Overly Broad Market** - Targeting a much wider audience than those who actually experience the problem
+2. **Excessively Narrow Market** - Targeting too few users to justify a dedicated solution
+3. **Misaligned Market** - Targeting an audience that doesn't match those experiencing the problem
+4. **Undefined Market** - Failing to clearly specify who and how many potential users exist
+
+## Response Format
+{{ 
+  "evaluation": "good" or "bad",
+  "marketSizeIssue": "overly_broad", "excessively_narrow", "misaligned", "undefined", or null if good,
+  "analysis": "Your detailed explanation of why the market size is appropriate or problematic"
+}}
+
+## Decision Framework
+Ask yourself:
+1. "Who exactly experiences this problem and would benefit from a solution?"
+2. "Is this audience large enough to justify building a solution?"
+3. "Is the stated market artificially inflated beyond those who would actually benefit?"
+4. "Is there a clear connection between the problem described and the market identified?"
+
+## Examples
+
+**Input**: "There is currently no standardized method of application deployment within the government. As a result, each team has to set up a complete deployment strategy independently which results in difficulty in maintenance, 2 months required to deploy and inconsistent security practices. The target audience is the whole of government."
+
+**Output**:
+{{ 
+  "evaluation": "bad",
+  "marketSizeIssue": "overly_broad",
+  "analysis": "The problem statement focuses specifically on application deployment challenges faced by development teams within government. However, the stated target audience ('the whole of government') is significantly broader than the actual users who would benefit from a solution. Most government employees and departments don't deploy applications, so including them artificially inflates the market size. A more appropriate market definition would specifically target government development teams, DevOps personnel, and IT departments responsible for application deployment - which would still represent a substantial market while maintaining precision and relevance."
+}}
+
+**Input**: "AirBnB's pitch deck. Price is an important concern for customers booking travel online. Hotels leave you disconnected from the city and its culture. No easy way exists to book a room with a local or become a host. There are currently 630,000 listed on temporary housing site couchsurfing.com. The TAM is 1.9 billion of total trips booked worldwide, SAM is 532M budget & online trips, SOM is 10.6M trips w/Airbnb."
+
+**Output**:
+{{ 
+  "evaluation": "good",
+  "marketSizeIssue": null,
+  "analysis": "This problem statement presents a well-calibrated market size approach. It clearly identifies the problem (price sensitivity in travel, disconnection from local culture, difficulty booking with locals) and provides concrete market sizing at multiple levels. The TAM (1.9B total trips) represents the broadest potential market, while the SAM (532M budget & online trips) narrows to a more relevant segment, and the SOM (10.6M trips) provides a realistic initial target. The reference to 630,000 couchsurfing.com listings offers validation that there's already demonstrated interest in alternative accommodation models. The market size is substantial enough to justify investment while remaining focused on travelers who would benefit directly from the solution."
+}}
+
+**Input**: "In Company X, many product owners are not able to come out with good product pitches. As a result, many clinics have to be held by the governance team to help the product owners to improve their pitch. Every time a clinic is held, 5 hours have to be spent by the governance team to read through, analyze and prepare for the clinic. There is also a shortage of manpower in the governance team of 10 people. We propose to create an analyzer that can perform a pre-analysis of the product pitches which can reduce the time taken by the governance team to perform a clinic from 5 to 2 hours."
+
+**Output**:
+{{ 
+  "evaluation": "bad",
+  "marketSizeIssue": "excessively_narrow",
+  "analysis": "The problem statement focuses too narrowly on a small governance team of just 10 people as the primary beneficiaries, which is an excessively small market to justify developing a specialized product. While the analyzer would help this team reduce their workload, the real opportunity lies with the larger group of product owners who struggle with creating effective pitches. A better market definition would target all product owners across Company X who need pitch improvement (potentially hundreds or thousands depending on company size), or even expand to product owners across multiple organizations facing similar challenges. This would present a much more compelling market opportunity while addressing the same fundamental problem."
+}}
+
+**Input**: "E-commerce returns are a growing challenge for online retailers, with 30% of all products ordered online being returned compared to 8.9% for brick-and-mortar stores. This costs retailers $550 billion annually and creates 5 billion pounds of landfill waste. Our solution targets the 213 million digital shoppers in the US who struggle with accurately assessing product fit and quality online, leading to these high return rates."
+
+**Output**:
+{{ 
+  "evaluation": "good",
+  "marketSizeIssue": null,
+  "analysis": "This problem statement presents a well-defined market size that directly aligns with the problem being addressed. It clearly identifies the issue (high return rates in e-commerce) and quantifies its impact ($550B annually, 5B pounds of waste). The target market of 213 million digital shoppers in the US is precisely the group experiencing the problem of difficulty assessing products online. This market is substantial enough to justify a solution while remaining appropriately focused on those who would directly benefit. The statement also effectively uses concrete numbers to demonstrate the scale of both the problem and the potential market, making a compelling case for the commercial viability of a solution."
+}}
+
+**Input**: "Employee onboarding is inefficient across industries. HR teams spend too much time on paperwork. We need a better system."
+
+**Output**:
+{{ 
+  "evaluation": "bad",
+  "marketSizeIssue": "undefined",
+  "analysis": "The problem statement fails to clearly define the market size or target audience with any specificity. While it mentions 'across industries,' it provides no quantification of how many companies, HR departments, or new employees might benefit from the solution. There are no metrics about the scale of the problem (beyond 'too much time') or the potential market opportunity. Without this information, it's impossible to assess whether the implied market is appropriately sized or commercially viable. A stronger statement would specify the number of businesses affected, average onboarding costs, or other concrete metrics that demonstrate the scale of both the problem and the potential market."
+}}
+"""
