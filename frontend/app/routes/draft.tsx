@@ -4,7 +4,10 @@ import { Card } from "@/components/ui/card";
 
 export default function Draft() {
   return (
-    <div className="container mx-auto p-6">
+    <div className="container p-6">
+      <h1 className="text-2xl font-bold mb-6">
+        Pager, your AI-powered funding proposal editor
+      </h1>
       <div className="grid gap-6">
         <section>
           <div className="flex items-center justify-between mb-4">

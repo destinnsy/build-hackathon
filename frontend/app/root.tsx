@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  NavLink,
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -32,8 +33,40 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      <body className="flex h-screen">
+        <nav className="w-64 border-r bg-gray-50 p-4">
+          <ul className="space-y-2">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `block p-2 rounded-lg ${
+                    isActive
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-gray-200 text-gray-700"
+                  }`
+                }
+              >
+                Landing Page
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/draft"
+                className={({ isActive }) =>
+                  `block p-2 rounded-lg ${
+                    isActive
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-gray-200 text-gray-700"
+                  }`
+                }
+              >
+                Draft Editor
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <main className="flex-1">{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>
