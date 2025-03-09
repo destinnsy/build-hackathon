@@ -21,6 +21,7 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
     showWarning: showProductWarning,
     redFlags,
     analysis: productAnalysis,
+    isLoading: isLoadingPrinciples,
   } = useEvaluateProductPrinciples(value);
 
   const {
@@ -28,6 +29,7 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
     showWarning: showTargetWarning,
     targetAudiences,
     analysis: targetAnalysis,
+    isLoading: isLoadingTarget,
   } = useEvaluateTargetAudience(value);
 
   const {
@@ -35,7 +37,10 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
     showWarning: showSizeWarning,
     marketSizeIssue,
     analysis: sizeAnalysis,
+    isLoading: isLoadingSize,
   } = useEvaluateProblemSize(value);
+
+  const isLoading = isLoadingPrinciples || isLoadingTarget || isLoadingSize;
 
   const handleAssessment = () => {
     evaluateProductPrinciples();
@@ -102,8 +107,9 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
                       variant="ghost"
                       size="sm"
                       onClick={handleAssessment}
+                      disabled={isLoading}
                     >
-                      Assess Problem Statement
+                      {isLoading ? "Assessing..." : "Assess Problem Statement"}
                     </Button>
                     <Button variant="ghost" size="sm">
                       Copy

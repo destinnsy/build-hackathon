@@ -18,6 +18,7 @@ export function SuccessMetrics({ problemStatement }: SuccessMetricsProps) {
     showWarning,
     redFlags,
     analysis,
+    isLoading,
   } = useEvaluateSuccessMetrics(metricsStatement, problemStatement);
 
   return (
@@ -61,8 +62,13 @@ export function SuccessMetrics({ problemStatement }: SuccessMetricsProps) {
                     2. What is your north star?
                   </h3>
                   <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" onClick={evaluateMetrics}>
-                      Assess Metrics
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={evaluateMetrics}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Assessing..." : "Assess Metrics"}
                     </Button>
                     <Button variant="ghost" size="sm">
                       Copy
