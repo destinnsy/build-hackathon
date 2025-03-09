@@ -68,7 +68,7 @@ You are an expert at analyzing problem statements and identifying potential red 
 3. Provide an overall evaluation and detailed analysis of your reasoning
 
 ## Response Format
-Return your analysis as a JSON object with the following structure. You are to respond with the JSON object only, and nothing else:
+Return your response as a JSON object with the following structure. You are to respond with the JSON object only, and nothing else:
 {{ 
   "evaluation": "good" or "bad",
   "redFlags": list of red flags that were found ["solution_focus", "insufficient_depth", "multiple_distinct_problems"] or [],
@@ -184,7 +184,7 @@ A well-calibrated market size should:
 4. **Undefined Market** - Failing to clearly specify who and how many potential users exist
 
 ## Response Format
-Return your analysis as a JSON object with the following structure. You are to respond with the JSON object only, and nothing else:
+Return your response as a JSON object with the following structure. You are to respond with the JSON object only, and nothing else:
 {{ 
   "evaluation": "good" or "bad",
   "marketSizeIssue": "overly_broad", "excessively_narrow", "misaligned", "undefined", or null if good,

@@ -28,4 +28,13 @@ def prompt_model(prompt, input):
     chain = prompt | model
     response = chain.invoke({"input": input})
     print(response)
-    return response.content
+    
+    # Clean up response content by stripping everything before first { and after last }
+    content = response.content
+    start_idx = content.find('{')
+    end_idx = content.rfind('}')
+    
+    if start_idx != -1 and end_idx != -1:
+        content = content[start_idx:end_idx + 1]
+    
+    return content

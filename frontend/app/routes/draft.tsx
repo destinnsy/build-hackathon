@@ -5,11 +5,30 @@ import { useState } from "react";
 import { WarningAlert } from "@/components/WarningAlert";
 import { useEvaluateProductPrinciples } from "@/hooks/useEvaluateProductPrinciples";
 import ProductPrinciplesMessage from "@/components/ProductPrinciplesMessage";
+import { useEvaluateTargetAudience } from "@/hooks/useEvaluateTargetAudience";
+import TargetAudienceMessage from "@/components/TargetAudienceMessage";
 
 export default function Draft() {
   const [problemStatement, setProblemStatement] = useState("");
-  const { evaluate, showWarning, redFlags, analysis } =
-    useEvaluateProductPrinciples(problemStatement);
+
+  const {
+    evaluate: evaluateProductPrinciples,
+    showWarning: showProductWarning,
+    redFlags,
+    analysis: productAnalysis,
+  } = useEvaluateProductPrinciples(problemStatement);
+
+  const {
+    evaluate: evaluateTargetAudience,
+    showWarning: showTargetWarning,
+    targetAudiences,
+    analysis: targetAnalysis,
+  } = useEvaluateTargetAudience(problemStatement);
+
+  const handleAssessment = () => {
+    evaluateProductPrinciples();
+    evaluateTargetAudience();
+  };
 
   return (
     <div className="container p-6">
@@ -17,9 +36,15 @@ export default function Draft() {
         Pager, your AI-powered funding proposal editor
       </h1>
 
-      {showWarning && (
-        <WarningAlert analysis={analysis!}>
+      {showProductWarning && (
+        <WarningAlert analysis={productAnalysis!}>
           <ProductPrinciplesMessage redFlags={redFlags} />
+        </WarningAlert>
+      )}
+
+      {showTargetWarning && (
+        <WarningAlert analysis={targetAnalysis!}>
+          <TargetAudienceMessage targetAudiences={targetAudiences} />
         </WarningAlert>
       )}
 
@@ -58,7 +83,11 @@ export default function Draft() {
                     3. What is the target audience?
                   </h3>
                   <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" onClick={evaluate}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleAssessment}
+                    >
                       Assess Problem Statement
                     </Button>
                     <Button variant="ghost" size="sm">
@@ -77,16 +106,24 @@ export default function Draft() {
           </Card>
         </section>
 
-        {/* Remove the old assessment results section since it's now in the warning banner */}
-        {analysis && (
+        {/* Show combined analysis results */}
+        {(productAnalysis || targetAnalysis) && (
           <section className="mt-4">
             <Card className="p-4">
               <h3 className="text-lg font-semibold mb-2">Assessment Results</h3>
               <div className="space-y-4">
-                <div>
-                  <h4 className="font-medium">Analysis:</h4>
-                  <p className="mt-1">{analysis}</p>
-                </div>
+                {productAnalysis && (
+                  <div>
+                    <h4 className="font-medium">Product Analysis:</h4>
+                    <p className="mt-1">{productAnalysis}</p>
+                  </div>
+                )}
+                {targetAnalysis && (
+                  <div>
+                    <h4 className="font-medium">Target Audience Analysis:</h4>
+                    <p className="mt-1">{targetAnalysis}</p>
+                  </div>
+                )}
               </div>
             </Card>
           </section>
