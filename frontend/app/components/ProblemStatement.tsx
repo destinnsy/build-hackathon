@@ -49,26 +49,8 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
   };
 
   return (
-    <>
-      {showProductWarning && (
-        <WarningAlert analysis={productAnalysis!}>
-          <ProductPrinciplesMessage redFlags={redFlags} />
-        </WarningAlert>
-      )}
-
-      {showTargetWarning && (
-        <WarningAlert analysis={targetAnalysis!}>
-          <TargetAudienceMessage targetAudiences={targetAudiences} />
-        </WarningAlert>
-      )}
-
-      {showSizeWarning && marketSizeIssue && (
-        <WarningAlert analysis={sizeAnalysis!}>
-          <ProblemSizeMessage marketSizeIssue={marketSizeIssue} />
-        </WarningAlert>
-      )}
-
-      <div className="grid gap-6">
+    <div className="flex flex-row w-full gap-6">
+      <div className="flex-1">
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl text-blue-500 font-semibold">
@@ -80,13 +62,6 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
                 className="bg-purple-500 text-white hover:bg-purple-600"
               >
                 Load Example
-              </Button>
-              <Button variant="destructive">Clear All</Button>
-              <Button
-                variant="default"
-                className="bg-green-500 hover:bg-green-600"
-              >
-                Copy All
               </Button>
             </div>
           </div>
@@ -103,14 +78,6 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
                     3. What is the target audience?
                   </h3>
                   <div className="flex gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleAssessment}
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Assessing..." : "Assess Problem Statement"}
-                    </Button>
                     <Button variant="ghost" size="sm">
                       Copy
                     </Button>
@@ -127,6 +94,47 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
           </Card>
         </section>
       </div>
-    </>
+
+      <div className="w-[400px]">
+        <Card className="p-4 sticky top-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl text-blue-500 font-semibold">Analysis</h2>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleAssessment}
+              disabled={isLoading}
+            >
+              {isLoading ? "Assessing..." : "Assess Problem Statement"}
+            </Button>
+          </div>
+          <div className="space-y-4">
+            {showProductWarning && (
+              <WarningAlert analysis={productAnalysis!}>
+                <ProductPrinciplesMessage redFlags={redFlags} />
+              </WarningAlert>
+            )}
+
+            {showTargetWarning && (
+              <WarningAlert analysis={targetAnalysis!}>
+                <TargetAudienceMessage targetAudiences={targetAudiences} />
+              </WarningAlert>
+            )}
+
+            {showSizeWarning && marketSizeIssue && (
+              <WarningAlert analysis={sizeAnalysis!}>
+                <ProblemSizeMessage marketSizeIssue={marketSizeIssue} />
+              </WarningAlert>
+            )}
+
+            {!showProductWarning && !showTargetWarning && !showSizeWarning && (
+              <p className="text-gray-500 text-center">
+                Click "Assess Problem Statement" to analyze your input
+              </p>
+            )}
+          </div>
+        </Card>
+      </div>
+    </div>
   );
 }

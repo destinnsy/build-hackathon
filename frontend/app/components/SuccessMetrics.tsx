@@ -22,14 +22,8 @@ export function SuccessMetrics({ problemStatement }: SuccessMetricsProps) {
   } = useEvaluateSuccessMetrics(metricsStatement, problemStatement);
 
   return (
-    <>
-      {analysis && showWarning && (
-        <WarningAlert analysis={analysis}>
-          <SuccessMetricsMessage redFlags={redFlags} />
-        </WarningAlert>
-      )}
-
-      <div className="grid gap-6">
+    <div className="flex flex-row w-full gap-6">
+      <div className="flex-1">
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl text-blue-500 font-semibold">
@@ -41,13 +35,6 @@ export function SuccessMetrics({ problemStatement }: SuccessMetricsProps) {
                 className="bg-purple-500 text-white hover:bg-purple-600"
               >
                 Load Example
-              </Button>
-              <Button variant="destructive">Clear All</Button>
-              <Button
-                variant="default"
-                className="bg-green-500 hover:bg-green-600"
-              >
-                Copy All
               </Button>
             </div>
           </div>
@@ -62,14 +49,6 @@ export function SuccessMetrics({ problemStatement }: SuccessMetricsProps) {
                     2. What is your north star?
                   </h3>
                   <div className="flex gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={evaluateMetrics}
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Assessing..." : "Assess Metrics"}
-                    </Button>
                     <Button variant="ghost" size="sm">
                       Copy
                     </Button>
@@ -86,6 +65,35 @@ export function SuccessMetrics({ problemStatement }: SuccessMetricsProps) {
           </Card>
         </section>
       </div>
-    </>
+
+      <div className="w-[400px]">
+        <Card className="p-4 sticky top-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl text-blue-500 font-semibold">Analysis</h2>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={evaluateMetrics}
+              disabled={isLoading}
+            >
+              {isLoading ? "Assessing..." : "Assess Metrics"}
+            </Button>
+          </div>
+          <div className="space-y-4">
+            {analysis && showWarning && (
+              <WarningAlert analysis={analysis}>
+                <SuccessMetricsMessage redFlags={redFlags} />
+              </WarningAlert>
+            )}
+
+            {!showWarning && (
+              <p className="text-gray-500 text-center">
+                Click "Assess Metrics" to analyze your input
+              </p>
+            )}
+          </div>
+        </Card>
+      </div>
+    </div>
   );
 }
