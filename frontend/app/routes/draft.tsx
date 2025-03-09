@@ -1,17 +1,11 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { WarningAlert } from "@/components/WarningAlert";
 
 export default function Draft() {
   const [problemStatement, setProblemStatement] = useState("");
-  const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
   const [assessment, setAssessment] = useState<{
     analysis: string;
     evaluation: "good" | "bad";
@@ -48,8 +42,7 @@ export default function Draft() {
       </h1>
 
       {assessment?.evaluation === "bad" && (
-        <div className="bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative mb-4">
-          <div className="font-bold mb-2">Warning!</div>
+        <WarningAlert analysis={assessment.analysis}>
           <div className="mb-2">
             We have detected the following in your problem statement:
           </div>
@@ -60,15 +53,7 @@ export default function Draft() {
               </li>
             ))}
           </ul>
-          <Collapsible open={isAnalysisOpen} onOpenChange={setIsAnalysisOpen}>
-            <CollapsibleTrigger className="flex items-center font-medium hover:text-orange-800">
-              Click here to view or hide the analysis
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-2 pl-4">
-              {assessment.analysis}
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
+        </WarningAlert>
       )}
 
       <div className="grid gap-6">
