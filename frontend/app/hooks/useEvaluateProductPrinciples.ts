@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { backend } from "../services/api";
 
 interface Assessment {
   analysis: string;
@@ -13,18 +14,15 @@ export function useEvaluateProductPrinciples(problemStatement: string) {
   const evaluate = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/query/product-principles`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: problemStatement }),
-        }
+      const { data, error } = await backend.post<Assessment>(
+        "/query/product-principles",
+        { text: problemStatement }
       );
 
-      const data = await response.json();
+      if (error) {
+        throw new Error(error);
+      }
+
       setAssessment(data);
     } catch (error) {
       console.error("Error assessing problem statement:", error);
