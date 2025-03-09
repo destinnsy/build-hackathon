@@ -3,37 +3,13 @@ import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { WarningAlert } from "@/components/WarningAlert";
+import { useEvaluateProductPrinciples } from "@/hooks/useEvaluateProductPrinciples";
+import ProductPrinciplesMessage from "@/components/ProductPrinciplesMessage";
 
 export default function Draft() {
   const [problemStatement, setProblemStatement] = useState("");
-  const [assessment, setAssessment] = useState<{
-    analysis: string;
-    evaluation: "good" | "bad";
-    redFlags: string[];
-  } | null>(null);
-
-  const handleAssessment = async () => {
-    console.log("Backend URL:", import.meta.env.VITE_BACKEND_URL);
-    console.log("Problem Statement:", problemStatement);
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/query/product-principles`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: problemStatement }),
-        }
-      );
-
-      const data = await response.json();
-      setAssessment(data);
-      console.log("Assessment result:", data);
-    } catch (error) {
-      console.error("Error assessing problem statement:", error);
-    }
-  };
+  const { evaluate, showWarning, redFlags, analysis } =
+    useEvaluateProductPrinciples(problemStatement);
 
   return (
     <div className="container p-6">
@@ -41,18 +17,9 @@ export default function Draft() {
         Pager, your AI-powered funding proposal editor
       </h1>
 
-      {assessment?.evaluation === "bad" && (
-        <WarningAlert analysis={assessment.analysis}>
-          <div className="mb-2">
-            We have detected the following in your problem statement:
-          </div>
-          <ul className="list-disc list-inside mb-4">
-            {assessment.redFlags.map((flag, index) => (
-              <li key={index} className="ml-4">
-                {flag}
-              </li>
-            ))}
-          </ul>
+      {showWarning && (
+        <WarningAlert analysis={analysis!}>
+          <ProductPrinciplesMessage redFlags={redFlags} />
         </WarningAlert>
       )}
 
@@ -91,11 +58,7 @@ export default function Draft() {
                     3. What is the target audience?
                   </h3>
                   <div className="flex gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleAssessment}
-                    >
+                    <Button variant="ghost" size="sm" onClick={evaluate}>
                       Assess Problem Statement
                     </Button>
                     <Button variant="ghost" size="sm">
@@ -115,18 +78,14 @@ export default function Draft() {
         </section>
 
         {/* Remove the old assessment results section since it's now in the warning banner */}
-        {assessment?.evaluation === "good" && (
+        {analysis && (
           <section className="mt-4">
             <Card className="p-4">
               <h3 className="text-lg font-semibold mb-2">Assessment Results</h3>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium">Analysis:</h4>
-                  <p className="mt-1">{assessment.analysis}</p>
-                </div>
-                <div>
-                  <h4 className="font-medium">Evaluation:</h4>
-                  <p className="mt-1 text-green-600">{assessment.evaluation}</p>
+                  <p className="mt-1">{analysis}</p>
                 </div>
               </div>
             </Card>
