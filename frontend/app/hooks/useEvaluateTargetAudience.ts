@@ -13,6 +13,8 @@ export function useEvaluateTargetAudience(problemStatement: string) {
   );
 
   const evaluate = async () => {
+    // Reset the state first
+    setAssessment(null);
     setIsLoading(true);
     try {
       const { data, error } = await backend.post<TargetAudienceAssessment>(

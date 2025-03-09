@@ -12,6 +12,7 @@ export function useEvaluateProductPrinciples(problemStatement: string) {
   const [assessment, setAssessment] = useState<Assessment | null>(null);
 
   const evaluate = async () => {
+    setAssessment(null);
     setIsLoading(true);
     try {
       const { data, error } = await backend.post<Assessment>(

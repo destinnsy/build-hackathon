@@ -19,6 +19,8 @@ export function useEvaluateProblemSize(problemStatement: string) {
   );
 
   const evaluate = async () => {
+    // Reset the state first
+    setAssessment(null);
     setIsLoading(true);
     try {
       const { data, error } = await backend.post<ProblemSizeAssessment>(
