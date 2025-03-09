@@ -121,35 +121,6 @@ export default function Draft() {
             </div>
           </Card>
         </section>
-
-        {/* Show combined analysis results */}
-        {(productAnalysis || targetAnalysis || sizeAnalysis) && (
-          <section className="mt-4">
-            <Card className="p-4">
-              <h3 className="text-lg font-semibold mb-2">Assessment Results</h3>
-              <div className="space-y-4">
-                {productAnalysis && (
-                  <div>
-                    <h4 className="font-medium">Product Analysis:</h4>
-                    <p className="mt-1">{productAnalysis}</p>
-                  </div>
-                )}
-                {targetAnalysis && (
-                  <div>
-                    <h4 className="font-medium">Target Audience Analysis:</h4>
-                    <p className="mt-1">{targetAnalysis}</p>
-                  </div>
-                )}
-                {sizeAnalysis && (
-                  <div>
-                    <h4 className="font-medium">Problem Size Analysis:</h4>
-                    <p className="mt-1">{sizeAnalysis}</p>
-                  </div>
-                )}
-              </div>
-            </Card>
-          </section>
-        )}
       </div>
     </div>
   );
