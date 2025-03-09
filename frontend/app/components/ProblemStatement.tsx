@@ -10,29 +10,32 @@ import TargetAudienceMessage from "@/components/TargetAudienceMessage";
 import { useEvaluateProblemSize } from "@/hooks/useEvaluateProblemSize";
 import ProblemSizeMessage from "@/components/ProblemSizeMessage";
 
-export function ProblemStatement() {
-  const [problemStatement, setProblemStatement] = useState("");
+interface ProblemStatementProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
+export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
   const {
     evaluate: evaluateProductPrinciples,
     showWarning: showProductWarning,
     redFlags,
     analysis: productAnalysis,
-  } = useEvaluateProductPrinciples(problemStatement);
+  } = useEvaluateProductPrinciples(value);
 
   const {
     evaluate: evaluateTargetAudience,
     showWarning: showTargetWarning,
     targetAudiences,
     analysis: targetAnalysis,
-  } = useEvaluateTargetAudience(problemStatement);
+  } = useEvaluateTargetAudience(value);
 
   const {
     evaluate: evaluateProblemSize,
     showWarning: showSizeWarning,
     marketSizeIssue,
     analysis: sizeAnalysis,
-  } = useEvaluateProblemSize(problemStatement);
+  } = useEvaluateProblemSize(value);
 
   const handleAssessment = () => {
     evaluateProductPrinciples();
@@ -110,8 +113,8 @@ export function ProblemStatement() {
                 <Textarea
                   className="min-h-[500px]"
                   placeholder="Placeholder text"
-                  value={problemStatement}
-                  onChange={(e) => setProblemStatement(e.target.value)}
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
                 />
               </div>
             </div>
