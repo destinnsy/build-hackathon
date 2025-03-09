@@ -7,6 +7,8 @@ import { useEvaluateProductPrinciples } from "@/hooks/useEvaluateProductPrincipl
 import ProductPrinciplesMessage from "@/components/ProductPrinciplesMessage";
 import { useEvaluateTargetAudience } from "@/hooks/useEvaluateTargetAudience";
 import TargetAudienceMessage from "@/components/TargetAudienceMessage";
+import { useEvaluateProblemSize } from "@/hooks/useEvaluateProblemSize";
+import ProblemSizeMessage from "@/components/ProblemSizeMessage";
 
 export default function Draft() {
   const [problemStatement, setProblemStatement] = useState("");
@@ -25,9 +27,17 @@ export default function Draft() {
     analysis: targetAnalysis,
   } = useEvaluateTargetAudience(problemStatement);
 
+  const {
+    evaluate: evaluateProblemSize,
+    showWarning: showSizeWarning,
+    marketSizeIssue,
+    analysis: sizeAnalysis,
+  } = useEvaluateProblemSize(problemStatement);
+
   const handleAssessment = () => {
     evaluateProductPrinciples();
     evaluateTargetAudience();
+    evaluateProblemSize();
   };
 
   return (
@@ -45,6 +55,12 @@ export default function Draft() {
       {showTargetWarning && (
         <WarningAlert analysis={targetAnalysis!}>
           <TargetAudienceMessage targetAudiences={targetAudiences} />
+        </WarningAlert>
+      )}
+
+      {showSizeWarning && marketSizeIssue && (
+        <WarningAlert analysis={sizeAnalysis!}>
+          <ProblemSizeMessage marketSizeIssue={marketSizeIssue} />
         </WarningAlert>
       )}
 
@@ -107,7 +123,7 @@ export default function Draft() {
         </section>
 
         {/* Show combined analysis results */}
-        {(productAnalysis || targetAnalysis) && (
+        {(productAnalysis || targetAnalysis || sizeAnalysis) && (
           <section className="mt-4">
             <Card className="p-4">
               <h3 className="text-lg font-semibold mb-2">Assessment Results</h3>
@@ -122,6 +138,12 @@ export default function Draft() {
                   <div>
                     <h4 className="font-medium">Target Audience Analysis:</h4>
                     <p className="mt-1">{targetAnalysis}</p>
+                  </div>
+                )}
+                {sizeAnalysis && (
+                  <div>
+                    <h4 className="font-medium">Problem Size Analysis:</h4>
+                    <p className="mt-1">{sizeAnalysis}</p>
                   </div>
                 )}
               </div>
