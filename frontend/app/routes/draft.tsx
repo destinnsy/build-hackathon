@@ -3,9 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export default function Draft() {
   const [problemStatement, setProblemStatement] = useState("");
+  const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
   const [assessment, setAssessment] = useState<{
     analysis: string;
     evaluation: "good" | "bad";
@@ -41,11 +47,27 @@ export default function Draft() {
         Pager, your AI-powered funding proposal editor
       </h1>
 
-      {/* Update warning banner styling */}
       {assessment?.evaluation === "bad" && (
-        <div className="bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative mb-4 flex items-center">
-          <strong className="font-bold">Warning!</strong>
-          <span className="block sm:inline ml-2">The evaluation is bad</span>
+        <div className="bg-orange-100 border border-orange-400 text-orange-700 px-4 py-3 rounded relative mb-4">
+          <div className="font-bold mb-2">Warning!</div>
+          <div className="mb-2">
+            We have detected the following in your problem statement:
+          </div>
+          <ul className="list-disc list-inside mb-4">
+            {assessment.redFlags.map((flag, index) => (
+              <li key={index} className="ml-4">
+                {flag}
+              </li>
+            ))}
+          </ul>
+          <Collapsible open={isAnalysisOpen} onOpenChange={setIsAnalysisOpen}>
+            <CollapsibleTrigger className="flex items-center font-medium hover:text-orange-800">
+              Click here to view or hide the analysis
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-2 pl-4">
+              {assessment.analysis}
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       )}
 
@@ -107,8 +129,8 @@ export default function Draft() {
           </Card>
         </section>
 
-        {/* Add assessment results display */}
-        {assessment && (
+        {/* Remove the old assessment results section since it's now in the warning banner */}
+        {assessment?.evaluation === "good" && (
           <section className="mt-4">
             <Card className="p-4">
               <h3 className="text-lg font-semibold mb-2">Assessment Results</h3>
@@ -119,28 +141,8 @@ export default function Draft() {
                 </div>
                 <div>
                   <h4 className="font-medium">Evaluation:</h4>
-                  <p
-                    className={`mt-1 ${
-                      assessment.evaluation === "bad"
-                        ? "text-red-600"
-                        : "text-green-600"
-                    }`}
-                  >
-                    {assessment.evaluation}
-                  </p>
+                  <p className="mt-1 text-green-600">{assessment.evaluation}</p>
                 </div>
-                {assessment.redFlags.length > 0 && (
-                  <div>
-                    <h4 className="font-medium">Red Flags:</h4>
-                    <ul className="list-disc list-inside mt-1">
-                      {assessment.redFlags.map((flag, index) => (
-                        <li key={index} className="text-red-600">
-                          {flag}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </div>
             </Card>
           </section>
