@@ -9,6 +9,8 @@ import { useEvaluateTargetAudience } from "@/hooks/useEvaluateTargetAudience";
 import TargetAudienceMessage from "@/components/TargetAudienceMessage";
 import { useEvaluateProblemSize } from "@/hooks/useEvaluateProblemSize";
 import ProblemSizeMessage from "@/components/ProblemSizeMessage";
+import { useEvaluateExistingProducts } from "@/hooks/useEvaluateExistingProducts";
+import ExistingProductsMessage from "@/components/ExistingProductsMessage";
 
 interface ProblemStatementProps {
   value: string;
@@ -40,12 +42,24 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
     isLoading: isLoadingSize,
   } = useEvaluateProblemSize(value);
 
-  const isLoading = isLoadingPrinciples || isLoadingTarget || isLoadingSize;
+  const {
+    evaluate: evaluateExistingProducts,
+    existingProducts,
+    hasExistingProducts,
+    isLoading: isLoadingExisting,
+  } = useEvaluateExistingProducts(value);
+
+  const isLoading =
+    isLoadingPrinciples ||
+    isLoadingTarget ||
+    isLoadingSize ||
+    isLoadingExisting;
 
   const handleAssessment = () => {
     evaluateProductPrinciples();
     evaluateTargetAudience();
     evaluateProblemSize();
+    evaluateExistingProducts();
   };
 
   return (
@@ -127,11 +141,20 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
               </WarningAlert>
             )}
 
-            {!showProductWarning && !showTargetWarning && !showSizeWarning && (
-              <p className="text-gray-500 text-center">
-                Click "Assess Problem Statement" to analyze your input
-              </p>
+            {hasExistingProducts && (
+              <WarningAlert analysis="Similar products exist in the market">
+                <ExistingProductsMessage products={existingProducts} />
+              </WarningAlert>
             )}
+
+            {!showProductWarning &&
+              !showTargetWarning &&
+              !showSizeWarning &&
+              !hasExistingProducts && (
+                <p className="text-gray-500 text-center">
+                  Click "Assess Problem Statement" to analyze your input
+                </p>
+              )}
           </div>
         </Card>
       </div>

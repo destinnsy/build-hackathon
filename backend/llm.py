@@ -7,6 +7,7 @@ from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from system_prompts import analyze_target_audience_prompt, analyze_product_principles_prompt, analyze_problem_size_prompt, success_metrics_evaluator_prompt, summarizer_prompt, existing_products_prompt
 from existing_products import existing_products
+import json
 
 model = init_chat_model("gpt-4o", model_provider="openai")
 low_temperature_model = init_chat_model("gpt-4o", model_provider="openai", temperature=0.1)
@@ -87,8 +88,20 @@ def analyze_existing_products(problem_statement):
     
     if start_idx != -1 and end_idx != -1:
         content = content[start_idx:end_idx + 1]
+
+    data = json.loads(content)
+    formatted_data = []
+    for problem_id in data:
+        product = existing_products[problem_id - 1]
+        formatted_data.append({
+            "id": product["id"],
+            "title": product["title"],
+            "summary": product["summary"],
+            "contact_point": product["contact_point"]
+        })
     
-    return content
+    
+    return formatted_data
     
 
 def prompt_model(prompt, input):

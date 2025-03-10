@@ -45,4 +45,4 @@ def query_success_metrics(query: UserQueryMetrics):
 
 @app.post("/query/existing-products")
 def query_existing_products(query: UserQuery):
-  return json.loads(analyze_existing_products(query.text))
+  return analyze_existing_products(query.text)
