@@ -4,6 +4,7 @@ import { backend } from "../services/api";
 interface ExistingProduct {
   title: string;
   contact_point: string[];
+  summary: string;
 }
 
 export function useEvaluateExistingProducts(problemStatement: string) {

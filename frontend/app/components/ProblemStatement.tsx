@@ -124,7 +124,7 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
           </div>
           <div className="space-y-4">
             {hasExistingProducts && (
-              <WarningAlert analysis="Similar products exist in the market">
+              <WarningAlert>
                 <ExistingProductsMessage products={existingProducts} />
               </WarningAlert>
             )}
