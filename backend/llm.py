@@ -18,10 +18,7 @@ def analyze_target_audience(target_audience):
 def analyze_problem_size(problem_statement):
     return prompt_model(analyze_problem_size_prompt, problem_statement)
 
-def analyze_success_metrics(metrics):
-    return prompt_model(success_metrics_evaluator_prompt, metrics)
-
-def summarize_problem_statement(problem_statement, input):
+def summarize_problem_statement(problem_statement, metrics_input):
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", summarizer_prompt),
@@ -29,7 +26,7 @@ def summarize_problem_statement(problem_statement, input):
         ]
     )
     chain = prompt | model
-    summary_response = chain.invoke({"input": input})
+    summary_response = chain.invoke({"input": problem_statement})
 
     print(summary_response.content)
 
@@ -46,7 +43,7 @@ def summarize_problem_statement(problem_statement, input):
         ]
     )
     chain = prompt | model
-    response = chain.invoke({"input": input, "summary": summary_response.content})
+    response = chain.invoke({"input": metrics_input, "summary": summary_response.content})
     print(response.content)
     # Clean up response content by stripping everything before first { and after last }
     content = response.content
