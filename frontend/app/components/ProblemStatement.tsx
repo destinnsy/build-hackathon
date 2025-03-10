@@ -123,6 +123,12 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
             </Button>
           </div>
           <div className="space-y-4">
+            {hasExistingProducts && (
+              <WarningAlert analysis="Similar products exist in the market">
+                <ExistingProductsMessage products={existingProducts} />
+              </WarningAlert>
+            )}
+
             {showProductWarning && (
               <WarningAlert analysis={productAnalysis!}>
                 <ProductPrinciplesMessage redFlags={redFlags} />
@@ -138,12 +144,6 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
             {showSizeWarning && marketSizeIssue && (
               <WarningAlert analysis={sizeAnalysis!}>
                 <ProblemSizeMessage marketSizeIssue={marketSizeIssue} />
-              </WarningAlert>
-            )}
-
-            {hasExistingProducts && (
-              <WarningAlert analysis="Similar products exist in the market">
-                <ExistingProductsMessage products={existingProducts} />
               </WarningAlert>
             )}
 
