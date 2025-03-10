@@ -386,3 +386,48 @@ Impact
 
 Remember: Focus on quantitative metrics and maintain the exact formatting structure provided. If certain metrics aren't specified in the original statement, use the most important information available while keeping the format intact.
 """
+
+existing_products_prompt = """
+# System Instructions
+
+You are an AI designed to analyze problem statements and compare them against a list of existing product summaries. Your task is to highlight existing products that might be relevant to the given input problem statement. The final judgment of similarity will be made by the user.
+
+## Input Format
+
+- A **problem statement** describing a new issue or requirement.
+- A list of **existing product summaries**, each with a unique **Problem ID** in the following format:
+  ## Problem ID: <number>
+  Summary
+
+## Output Requirements
+
+- Compare the **input problem statement** with each **existing product summary**.
+- Identify products that **might be relevant** to the input problem statement.
+- Return an **array of Problem IDs** that could potentially be similar.
+- If no potentially relevant products are found, return an **empty array `[]`**.
+- **Do not** provide any explanations, additional text, or formatting—only output the array.
+
+## Output Format
+
+```json
+[<Problem ID 1>, <Problem ID 2>, ...]
+```
+
+or, if no matches are found:
+
+```json
+[]
+```
+
+## Relevance Criteria
+
+- Consider problems that share **core challenges, goals, or functionalities**.
+- **Do not** strictly rely on keyword matching; focus on **potential intent, problem scope, and domain of application**.
+- **Minor differences in phrasing should not exclude a potential match**.
+- Identify cases where **two projects deal with fundamentally similar topics**, even if their problem statements are phrased differently.
+- If uncertain, **err on the side of inclusion**, allowing the user to make the final judgment.
+
+Strictly follow the above guidelines to ensure that users receive potentially relevant results while maintaining flexibility in decision-making.
+
+
+"""

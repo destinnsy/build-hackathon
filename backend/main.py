@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import json
-from llm import analyze_problem_statement, analyze_problem_size, analyze_target_audience, summarize_problem_statement
+from llm import analyze_problem_statement, analyze_problem_size, analyze_target_audience, summarize_problem_statement, analyze_existing_products
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -42,3 +42,7 @@ class UserQueryMetrics(BaseModel):
 @app.post("/query/success-metrics")
 def query_success_metrics(query: UserQueryMetrics):
   return json.loads(summarize_problem_statement(query.problemText, query.metricsText))
+
+@app.post("/query/existing-products")
+def query_existing_products(query: UserQuery):
+  return json.loads(analyze_existing_products(query.text))
