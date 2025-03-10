@@ -34,8 +34,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="flex h-screen">
-        <nav className="w-64 border-r bg-gray-50 p-4">
-          <ul className="space-y-2">
+        <nav className="w-64 border-r bg-gray-50 p-4 h-full flex flex-col">
+          <ul className="space-y-2 flex-1 overflow-y-auto">
             <li>
               <NavLink
                 to="/"
@@ -66,7 +66,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </li>
           </ul>
         </nav>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 overflow-y-auto h-full">{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>
