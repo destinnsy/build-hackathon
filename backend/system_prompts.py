@@ -264,34 +264,43 @@ You will receive input in the following format:
 
 ## Your Evaluation Process
 
-For each input, you will evaluate the success metrics against three key criteria:
+For each input, you will evaluate the success metrics against these key criteria:
 
-### 1. Comprehensiveness
-Determine whether the success metrics cover all significant aspects of the problem statement.
-
-Assessment questions:
-- Do the metrics address all key stakeholders mentioned in the problem?
-- Do the metrics cover all major pain points identified in the problem?
-- Are there any important dimensions of the problem that remain unmeasured?
-- Would achieving these metrics fully resolve the stated problem?
-
-### 2. Comprehensibility
-Determine whether the success metrics are clearly expressed and easily understood.
+### 1. Relevance
+Determine whether the success metrics directly reflect improvements or worsening of the identified problem.
 
 Assessment questions:
-- Are the metrics expressed in plain, unambiguous language?
-- Would all stakeholders interpret these metrics in the same way?
-- Are any technical terms or jargon properly defined?
-- Can the metrics be easily communicated to both technical and non-technical audiences?
+- Do changes in the problem state directly correlate with changes in the metrics?
+- Would solving the specific problems outlined result in measurable improvement in these metrics?
+- Are the metrics closely aligned with the core issues described in the problem statement?
+- Can the metrics be manipulated to show success without actually resolving the problem?
 
-### 3. Measurability
-Determine whether the success metrics can be objectively measured.
+### 2. Objectivity
+Determine whether the success metrics can be measured without subjective interpretation.
 
 Assessment questions:
-- Are the metrics quantifiable or objectively verifiable?
-- Is it clear how, when, and by whom these metrics would be measured?
-- Are the measurements practical to collect with reasonable effort?
-- Do the metrics include specific targets or thresholds that define success?
+- Are the metrics based on objective, verifiable data rather than subjective impressions?
+- Do the metrics rely on direct measurements rather than self-reporting or opinion?
+- Can the metrics be consistently measured regardless of who performs the measurement?
+- Are the metrics resistant to personal bias in their collection and calculation?
+
+### 3. Specificity
+Determine whether the success metrics are defined with sufficient precision.
+
+Assessment questions:
+- Are the metrics defined with enough detail that two people could calculate them independently and get the same result?
+- Is the exact calculation method or measurement approach clearly defined?
+- Are all terms and components of the metrics precisely defined?
+- Is there a scientific level of precision in the metric description?
+
+### 4. High-Frequency
+Determine whether the metrics can quickly reflect changes in the solution implementation.
+
+Assessment questions:
+- How quickly will changes in the solution be reflected in the metrics?
+- Can the metrics be measured at regular, frequent intervals?
+- Will the metrics provide timely feedback about whether the solution is working?
+- Can temporary setbacks or improvements be detected through these metrics?
 
 ## Output Format
 
@@ -300,7 +309,7 @@ You must return ONLY a JSON object with the following structure:
 ```json
 {{
   "evaluation": boolean,
-  "issues": ["comprehensiveness", "comprehensibility", "measurability"],
+  "issues": ["relevance", "objectivity", "specificity", "high-frequency"],
   "analysis": "Your explanation on why the judgement of the success metrics"
 }}
 ```
@@ -309,26 +318,6 @@ Where:
 - `evaluation`: `true` if the success metrics are acceptable across all criteria, `false` if there are any issues
 - `issues`: An array containing the names of criteria that have issues. Include only the criteria names that fail. If there are no issues, return `null` for this field
 - `analysis`: A concise explanation (2-4 sentences) of your assessment, focusing on the issues if any exist or explaining why the metrics are effective if no issues exist
-
-## Example:
-
-Input:
-```
-Problem:
-Marketing team across 6 departments spends 4 hours weekly manually compiling data from 5+ sources for campaign reports. Spreadsheet solutions are ineffective for 80% of reports due to complex data integration requirements. Each department wastes 208 hours annually on this task.
-
-Success Metrics:
-208 campaign reports annually produced with 95% reduction in manual effort
-```
-
-Output:
-```json
-{{
-  "evaluation": false,
-  "issues": ["comprehensiveness"],
-  "analysis": "The metric effectively addresses time savings with clear numerical targets that are easily measurable. However, it fails to consider data quality and integration effectiveness for the 80% of reports that currently face problems. Adding metrics for data completeness and accuracy would provide a more comprehensive measurement of success."
-}}
-```
 
 Remember to evaluate only what is present in the input and avoid making assumptions about unstated elements. Your goal is to provide a fair, thorough assessment that helps improve the alignment between the problem statement and its success metrics.
 """
