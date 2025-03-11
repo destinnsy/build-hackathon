@@ -3,13 +3,15 @@ from pydantic import BaseModel
 import json
 from llm import analyze_problem_statement, analyze_problem_size, analyze_target_audience, summarize_problem_statement, analyze_existing_products
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+import os
 
 app = FastAPI()
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Your frontend URL
+    allow_origins=["http://localhost:5173", "*.airbase.sg"],  # Your frontend URL
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
@@ -46,3 +48,6 @@ def query_success_metrics(query: UserQueryMetrics):
 @app.post("/query/existing-products")
 def query_existing_products(query: UserQuery):
   return analyze_existing_products(query.text)
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=os.getenv("PORT", default=8000), log_level="info")
