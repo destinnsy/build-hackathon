@@ -70,14 +70,6 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
             <h2 className="text-xl text-blue-500 font-semibold">
               Problem Statement
             </h2>
-            <div className="flex gap-2">
-              <Button
-                variant="secondary"
-                className="bg-purple-500 text-white hover:bg-purple-600"
-              >
-                Load Example
-              </Button>
-            </div>
           </div>
 
           <Card className="p-4">
@@ -91,11 +83,6 @@ export function ProblemStatement({ value, onChange }: ProblemStatementProps) {
                     <br />
                     3. What is the target audience?
                   </h3>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="sm">
-                      Copy
-                    </Button>
-                  </div>
                 </div>
                 <Textarea
                   className="min-h-[500px]"
