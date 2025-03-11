@@ -48,6 +48,3 @@ def query_success_metrics(query: UserQueryMetrics):
 @app.post("/query/existing-products")
 def query_existing_products(query: UserQuery):
   return analyze_existing_products(query.text)
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=os.getenv("PORT", default=8000), log_level="info")
