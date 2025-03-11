@@ -5,6 +5,7 @@ interface ApiResponse<T> {
 
 export const backend = {
   post: async <T>(endpoint: string, body: any): Promise<ApiResponse<T>> => {
+    console.log("VITE_BACKEND_URL", import.meta.env.VITE_BACKEND_URL);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}${endpoint}`,
