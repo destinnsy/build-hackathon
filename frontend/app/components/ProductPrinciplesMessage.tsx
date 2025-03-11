@@ -1,3 +1,5 @@
+import { PRODUCT_PRINCIPLES_MESSAGES } from "../constants/messages";
+
 interface ProductPrinciplesMessageProps {
   redFlags: string[];
 }
@@ -5,6 +7,14 @@ interface ProductPrinciplesMessageProps {
 export default function ProductPrinciplesMessage({
   redFlags,
 }: ProductPrinciplesMessageProps) {
+  const getFlagMessage = (flag: string) => {
+    return (
+      PRODUCT_PRINCIPLES_MESSAGES[
+        flag as keyof typeof PRODUCT_PRINCIPLES_MESSAGES
+      ] || PRODUCT_PRINCIPLES_MESSAGES.default
+    );
+  };
+
   return (
     <>
       <div className="mb-2">
@@ -13,7 +23,7 @@ export default function ProductPrinciplesMessage({
       <ul className="list-disc list-inside mb-4">
         {redFlags.map((flag, index) => (
           <li key={index} className="ml-4">
-            {flag}
+            {getFlagMessage(flag)}
           </li>
         ))}
       </ul>
