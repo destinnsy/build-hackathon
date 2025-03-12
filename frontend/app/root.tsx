@@ -61,7 +61,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   }`
                 }
               >
-                Draft Editor
+                Writing
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/tools"
+                className={({ isActive }) =>
+                  `block p-2 rounded-lg ${
+                    isActive
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-gray-200 text-gray-700"
+                  }`
+                }
+              >
+                Tools
               </NavLink>
             </li>
           </ul>
