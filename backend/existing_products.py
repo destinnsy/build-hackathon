@@ -15,18 +15,6 @@ Without a robust anonymization tool, agencies face high development costs, ineff
       "id": 2,
       "summary": """
 Problem:
-RCMs struggle to engage socially isolated seniors effectively due to manpower constraints, reliance on ineffective physical and digital marketing, and the labor-intensive nature of in-person outreach. Existing methods are slow, inefficient, and contribute to RCM burnout.
-
-Impact:
-Without a scalable solution, senior isolation will worsen, leading to deteriorating mental and physical health, weakened community ties, and increased strain on national healthcare resources.      
-""",
-      "contact_point": ["jack@example.com"],
-      "title": "Senior Connect"
-    },
-    {
-      "id": 3,
-      "summary": """
-Problem:
 Government officers spend excessive time manually processing, extracting, and verifying information from millions of documents annually. This process is inefficient, prone to human errors, and diverts resources from higher-value tasks.
 
 Impact:
@@ -36,7 +24,7 @@ Automating document processing could save over 1.67 million man-hours annually, 
       "title": "READ"
     },
     {
-      "id": 4,
+      "id": 3,
       "summary": """
 Problem:
 The current document verification process is inefficient, costly, and prone to fraud. Hard copies and PDFs are difficult to authenticate, machine-read, and revoke, leading to slow verification, data security risks, and high operational costs.
@@ -46,5 +34,17 @@ Without a solution, document fraud will escalate with GenAI, verification costs 
 """,
       "contact_point": ["jeff@example.com"],
       "title": "TrustDoc"
-    }
+    },
+    {
+      "id": 4,
+      "summary": """
+Problem:
+Managing multiple property leases is disorganized, time-consuming, and error-prone. Paper contracts, spreadsheets, and disconnected systems make it difficult to track renewal dates, rent increases, maintenance responsibilities, and tenant communication, leading to missed deadlines, compliance issues, and revenue leakage.
+
+Impact:
+Without a solution, property owners face increasing administrative burden, legal exposure from compliance failures, strained tenant relationships, and reduced profitability as portfolio size grows.
+""",
+      "contact_point": ["sarah@example.com"],
+      "title": "LeaseTracker"
+    },
 ]
