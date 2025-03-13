@@ -16,7 +16,6 @@ interface Tool {
 export default function Tools() {
     const [activeCategory, setActiveCategory] = useState<string>("all");
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [showSidebar, setShowSidebar] = useState(true);
 
     const tools: Tool[] = [
         {
@@ -106,21 +105,13 @@ export default function Tools() {
                             />
                         </svg>
                     </div>
-
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowSidebar(!showSidebar)}
-                    >
-                        {showSidebar ? "Hide Categories" : "Show Categories"}
-                    </Button>
                 </div>
             </div>
 
             {/* Main Content - Positioned below the fixed header with proper spacing */}
             <div className="w-full h-full pt-14">
                 {/* Tools Grid */}
-                <div className={`w-full h-full p-6 pr-[350px]`}>
+                <div className="w-full h-full p-6">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-6">Product Resources</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
@@ -167,7 +158,7 @@ export default function Tools() {
                         ))}
 
                         {filteredTools.length === 0 && (
-                            <div className="col-span-3 flex flex-col items-center justify-center py-12 text-center">
+                            <div className="col-span-full flex flex-col items-center justify-center py-12 text-center">
                                 <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                                     <svg
                                         className="h-8 w-8 text-gray-400"
@@ -192,50 +183,6 @@ export default function Tools() {
                         )}
                     </div>
                 </div>
-
-                {/* Sidebar */}
-                {showSidebar && (
-                    <div className="fixed mt-24 right-0 top-0 bottom-0 w-[350px] bg-white border-l border-gray-200 overflow-y-auto">
-                        <div className="p-4">
-                            <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-lg font-semibold text-gray-800">Categories</h2>
-                            </div>
-
-                            <div className="space-y-2">
-                                {categories.map((category) => (
-                                    <button
-                                        key={category.id}
-                                        className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeCategory === category.id
-                                            ? "bg-orange-50 text-orange-700 font-medium border-l-4 border-orange-500"
-                                            : "text-gray-700 hover:bg-gray-50"
-                                            }`}
-                                        onClick={() => setActiveCategory(category.id)}
-                                    >
-                                        {category.name}
-                                        {activeCategory === category.id && (
-                                            <span className="float-right">
-                                                <svg
-                                                    className="h-5 w-5 text-orange-500"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M5 13l4 4L19 7"
-                                                    />
-                                                </svg>
-                                            </span>
-                                        )}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );
