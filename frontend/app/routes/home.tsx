@@ -64,10 +64,10 @@ const Home = () => {
       {/* Navbar */}
       <header className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
-          <div className="text-xl font-bold flex items-center">
+          <a href="/" className="text-xl font-bold flex items-center">
             <img src={pagerLogo} alt="Pager Logo" className="h-6 w-6 mr-2" />
             Pager
-          </div>
+          </a>
         </div> 
         <div>
           <a href="/draft" className="bg-orange-100 text-orange-800 px-4 py-2 rounded-md flex items-center hover:bg-orange-200 transition-colors">

@@ -134,10 +134,10 @@ export default function Draft() {
     <div className="flex flex-col h-screen overflow-hidden bg-gray-50">
       {/* Header - Fixed at the top below the masthead */}
       <div className="fixed left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center px-4 z-10">
-        <div className="text-xl font-bold flex items-center">
+        <a href="/" className="text-xl font-bold flex items-center">
           <img src={pagerLogo} alt="Pager Logo" className="h-6 w-6 mr-2" />
           Pager
-        </div>
+        </a>
 
         <div className="ml-auto flex items-center gap-2">
           <Button
@@ -166,21 +166,19 @@ export default function Draft() {
           {/* Tabs */}
           <div className="flex border-b border-gray-200 mb-4">
             <button
-              className={`px-4 py-2 font-medium text-sm ${
-                activeTab === "problem"
+              className={`px-4 py-2 font-medium text-sm ${activeTab === "problem"
                   ? "text-orange-600 border-b-2 border-orange-600"
                   : "text-gray-500 hover:text-gray-700"
-              }`}
+                }`}
               onClick={() => setActiveTab("problem")}
             >
               Problem Statement
             </button>
             <button
-              className={`px-4 py-2 font-medium text-sm ${
-                activeTab === "metrics"
+              className={`px-4 py-2 font-medium text-sm ${activeTab === "metrics"
                   ? "text-orange-600 border-b-2 border-orange-600"
                   : "text-gray-500 hover:text-gray-700"
-              }`}
+                }`}
               onClick={() => setActiveTab("metrics")}
             >
               Success Metrics

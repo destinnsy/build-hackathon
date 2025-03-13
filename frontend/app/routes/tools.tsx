@@ -77,10 +77,10 @@ export default function Tools() {
         <div className="flex flex-col h-screen overflow-hidden bg-gray-50">
             {/* Header - Fixed at the top below the masthead */}
             <div className="fixed left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center px-4 z-10">
-                <div className="text-xl font-bold flex items-center">
+                <a href="/" className="text-xl font-bold flex items-center">
                     <img src={pagerLogo} alt="Pager Logo" className="h-6 w-6 mr-2" />
                     Pager
-                </div>
+                </a>
 
                 <div className="ml-auto flex items-center gap-2">
                     <div className="relative mr-2">
@@ -206,8 +206,8 @@ export default function Tools() {
                                     <button
                                         key={category.id}
                                         className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeCategory === category.id
-                                                ? "bg-orange-50 text-orange-700 font-medium border-l-4 border-orange-500"
-                                                : "text-gray-700 hover:bg-gray-50"
+                                            ? "bg-orange-50 text-orange-700 font-medium border-l-4 border-orange-500"
+                                            : "text-gray-700 hover:bg-gray-50"
                                             }`}
                                         onClick={() => setActiveCategory(category.id)}
                                     >
