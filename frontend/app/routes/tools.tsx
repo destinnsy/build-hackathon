@@ -87,7 +87,7 @@ export default function Tools() {
                         <input
                             type="text"
                             placeholder="Search tools..."
-                            className="w-64 px-4 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="w-64 px-4 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -206,8 +206,8 @@ export default function Tools() {
                                     <button
                                         key={category.id}
                                         className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${activeCategory === category.id
-                                            ? "bg-blue-50 text-blue-700 font-medium border-l-4 border-blue-500"
-                                            : "text-gray-700 hover:bg-gray-50"
+                                                ? "bg-orange-50 text-orange-700 font-medium border-l-4 border-orange-500"
+                                                : "text-gray-700 hover:bg-gray-50"
                                             }`}
                                         onClick={() => setActiveCategory(category.id)}
                                     >
@@ -215,7 +215,7 @@ export default function Tools() {
                                         {activeCategory === category.id && (
                                             <span className="float-right">
                                                 <svg
-                                                    className="h-5 w-5 text-blue-500"
+                                                    className="h-5 w-5 text-orange-500"
                                                     fill="none"
                                                     stroke="currentColor"
                                                     viewBox="0 0 24 24"

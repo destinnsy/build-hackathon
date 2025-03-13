@@ -70,7 +70,7 @@ const Home = () => {
           </div>
         </div> 
         <div>
-          <a href="/draft" className="bg-gray-100 text-gray-800 px-4 py-2 rounded-md flex items-center">
+          <a href="/draft" className="bg-orange-100 text-orange-800 px-4 py-2 rounded-md flex items-center hover:bg-orange-200 transition-colors">
             Get started 
             <ChevronRight className="ml-1 h-4 w-4" />
           </a>
@@ -89,11 +89,11 @@ const Home = () => {
           product resources — all in one platform.
         </p>
         <div className="flex justify-center space-x-4">
-          <a href="/draft" className="bg-gray-800 text-white px-5 py-2.5 rounded-md flex items-center">
+          <a href="/draft" className="bg-orange-600 text-white px-5 py-2.5 rounded-md flex items-center hover:bg-orange-700 transition-colors">
             Evaluate proposal 
             <ChevronRight className="ml-1 h-4 w-4" />
           </a>
-          <a href="/tools" className="bg-white border border-gray-300 text-gray-800 px-5 py-2.5 rounded-md flex items-center">
+          <a href="/tools" className="bg-white border border-orange-300 text-orange-800 px-5 py-2.5 rounded-md flex items-center hover:bg-orange-50 transition-colors">
             View resources
             <ArrowRight className="ml-1 h-4 w-4" />
           </a>
@@ -113,18 +113,18 @@ const Home = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* Feature 1 */}
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-orange-50 p-6 rounded-lg border border-orange-100">
             <div className="flex justify-between mb-4">
-              <h3 className="text-xl font-semibold">Evaluate Proposal</h3>
+              <h3 className="text-xl font-semibold text-orange-800">Evaluate Proposal</h3>
               <span className="text-orange-500">🔍</span>
             </div>
             <p className="text-gray-600">Get feedback on your funding proposals to maximize success</p>
           </div>
 
           {/* Feature 3 */}
-          <div className="bg-gray-50 p-6 rounded-lg">
+          <div className="bg-orange-50 p-6 rounded-lg border border-orange-100">
             <div className="flex justify-between mb-4">
-              <h3 className="text-xl font-semibold">Product Resources</h3>
+              <h3 className="text-xl font-semibold text-orange-800">Product Resources</h3>
               <span className="text-orange-500">🛠️</span>
             </div>
             <p className="text-gray-600">Find curated tools and resources to help you in your product journey</p>
@@ -156,9 +156,9 @@ const Home = () => {
           <div className="text-gray-500 mb-4 md:mb-0">© 2025 Pager</div> 
           
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
-            <a href="https://docs.google.com/document/d/11KaFeszsX9UXaciYlCPtl9vA_pGUNk7b/edit?tab=t.0" className="text-gray-500 hover:text-gray-700 text-sm">Privacy Policy</a>
+            <a href="https://docs.google.com/document/d/11KaFeszsX9UXaciYlCPtl9vA_pGUNk7b/edit?tab=t.0" className="text-gray-500 hover:text-orange-700 text-sm">Privacy Policy</a>
             <span className="text-gray-300">|</span>
-            <a href="https://docs.google.com/document/d/1y-1eeFDoU1_YlemmFOmnZJOUC-WdDIrj/edit?tab=t.0" className="text-gray-500 hover:text-gray-700 text-sm">Terms of Use</a>
+            <a href="https://docs.google.com/document/d/1y-1eeFDoU1_YlemmFOmnZJOUC-WdDIrj/edit?tab=t.0" className="text-gray-500 hover:text-orange-700 text-sm">Terms of Use</a>
           </div>
         </div>
       </footer>

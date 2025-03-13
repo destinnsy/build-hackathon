@@ -113,9 +113,9 @@ export default function Draft() {
   // Get the color based on score
   const getScoreColor = () => {
     if (overallScore === null) return "bg-gray-200";
-    if (overallScore >= 80) return "bg-green-500";
-    if (overallScore >= 60) return "bg-yellow-500";
-    return "bg-red-500";
+    if (overallScore >= 80) return "bg-orange-500";
+    if (overallScore >= 60) return "bg-orange-400";
+    return "bg-orange-300";
   };
 
   // Count issues
@@ -166,19 +166,21 @@ export default function Draft() {
           {/* Tabs */}
           <div className="flex border-b border-gray-200 mb-4">
             <button
-              className={`px-4 py-2 font-medium text-sm ${activeTab === "problem"
-                  ? "text-blue-600 border-b-2 border-blue-600"
+              className={`px-4 py-2 font-medium text-sm ${
+                activeTab === "problem"
+                  ? "text-orange-600 border-b-2 border-orange-600"
                   : "text-gray-500 hover:text-gray-700"
-                }`}
+              }`}
               onClick={() => setActiveTab("problem")}
             >
               Problem Statement
             </button>
             <button
-              className={`px-4 py-2 font-medium text-sm ${activeTab === "metrics"
-                  ? "text-blue-600 border-b-2 border-blue-600"
+              className={`px-4 py-2 font-medium text-sm ${
+                activeTab === "metrics"
+                  ? "text-orange-600 border-b-2 border-orange-600"
                   : "text-gray-500 hover:text-gray-700"
-                }`}
+              }`}
               onClick={() => setActiveTab("metrics")}
             >
               Success Metrics
@@ -194,7 +196,7 @@ export default function Draft() {
                   Describe the problem, its size, and the target audience.
                 </p>
                 <Textarea
-                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-blue-500 focus:ring-blue-500 w-full"
+                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
                   placeholder="Describe the problem you're trying to solve..."
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -207,7 +209,7 @@ export default function Draft() {
                   Define your success metrics and north star metric.
                 </p>
                 <Textarea
-                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-blue-500 focus:ring-blue-500 w-full"
+                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
                   placeholder="Describe your success metrics and north star metric..."
                   value={metricsContent}
                   onChange={(e) => setMetricsContent(e.target.value)}
@@ -296,8 +298,8 @@ export default function Draft() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-[70vh] text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                   </div>
