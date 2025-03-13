@@ -88,14 +88,14 @@ const Home = () => {
           powered writing assistance, get instant feedback on your proposals, and 
           product resources — all in one platform.
         </p>
-        <div className="flex justify-center space-x-4">
-          <a href="/draft" className="bg-orange-600 text-white px-5 py-2.5 rounded-md flex items-center hover:bg-orange-700 transition-colors">
-            Evaluate proposal 
-            <ChevronRight className="ml-1 h-4 w-4" />
+        <div className="flex justify-center space-x-4 mx-auto">
+          <a href="/draft" className="bg-orange-600 text-white px-5 py-2.5 rounded-md flex items-center justify-center hover:bg-orange-700 transition-colors min-w-[180px]">
+            <span>Evaluate proposal</span>
+            <ChevronRight className="ml-2 h-4 w-4 flex-shrink-0" />
           </a>
-          <a href="/tools" className="bg-white border border-orange-300 text-orange-800 px-5 py-2.5 rounded-md flex items-center hover:bg-orange-50 transition-colors">
-            View resources
-            <ArrowRight className="ml-1 h-4 w-4" />
+          <a href="/tools" className="bg-white border border-orange-300 text-orange-800 px-5 py-2.5 rounded-md flex items-center justify-center hover:bg-orange-50 transition-colors min-w-[180px]">
+            <span>View resources</span>
+            <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
           </a>
         </div>
         <div className="absolute top-64 right-1/4 text-orange-500 opacity-20">
@@ -111,9 +111,9 @@ const Home = () => {
           and maximize your chances of success of getting funded
         </p>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="flex flex-col md:flex-row justify-center gap-8 max-w-4xl mx-auto">
           {/* Feature 1 */}
-          <div className="bg-orange-50 p-6 rounded-lg border border-orange-100">
+          <div className="bg-orange-50 p-6 rounded-lg border border-orange-100 md:w-[350px]">
             <div className="flex justify-between mb-4">
               <h3 className="text-xl font-semibold text-orange-800">Evaluate Proposal</h3>
               <span className="text-orange-500">🔍</span>
@@ -121,8 +121,8 @@ const Home = () => {
             <p className="text-gray-600">Get feedback on your funding proposals to maximize success</p>
           </div>
 
-          {/* Feature 3 */}
-          <div className="bg-orange-50 p-6 rounded-lg border border-orange-100">
+          {/* Feature 2 */}
+          <div className="bg-orange-50 p-6 rounded-lg border border-orange-100 md:w-[350px]">
             <div className="flex justify-between mb-4">
               <h3 className="text-xl font-semibold text-orange-800">Product Resources</h3>
               <span className="text-orange-500">🛠️</span>
