@@ -9,12 +9,12 @@ interface ExistingProduct {
 
 export function useEvaluateExistingProducts(problemStatement: string) {
   const [isLoading, setIsLoading] = useState(false);
-  const [existingProducts, setExistingProducts] = useState<ExistingProduct[]>(
-    []
-  );
+  const [existingProducts, setExistingProducts] = useState<
+    ExistingProduct[] | null
+  >([]);
 
   const evaluate = async () => {
-    setExistingProducts([]);
+    setExistingProducts(null);
     setIsLoading(true);
     try {
       const { data, error } = await backend.post<ExistingProduct[]>(
@@ -37,7 +37,9 @@ export function useEvaluateExistingProducts(problemStatement: string) {
   return {
     evaluate,
     isLoading,
-    existingProducts,
-    hasExistingProducts: existingProducts.length > 0,
+    isEvaluated: existingProducts !== null && existingProducts.length === 0,
+    existingProducts: existingProducts ?? [],
+    hasExistingProducts:
+      existingProducts !== null && existingProducts.length > 0,
   };
 }

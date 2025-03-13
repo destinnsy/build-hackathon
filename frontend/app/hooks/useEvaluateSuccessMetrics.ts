@@ -41,6 +41,7 @@ export function useEvaluateSuccessMetrics(
   return {
     evaluate,
     isLoading,
+    isEvaluated: assessment !== null && assessment.evaluation === true,
     showWarning: assessment?.evaluation === false,
     redFlags: assessment?.issues ?? [],
     analysis: assessment?.analysis,

@@ -43,6 +43,7 @@ export function useEvaluateProblemSize(problemStatement: string) {
   return {
     evaluate,
     isLoading,
+    isEvaluated: assessment !== null && assessment.evaluation === "good",
     showWarning: assessment?.evaluation === "bad",
     marketSizeIssue: assessment?.marketSizeIssue,
     analysis: assessment?.analysis,

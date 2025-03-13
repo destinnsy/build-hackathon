@@ -14,7 +14,7 @@ import TargetAudienceMessage from "@/components/TargetAudienceMessage";
 import ProblemSizeMessage from "@/components/ProblemSizeMessage";
 import ExistingProductsMessage from "@/components/ExistingProductsMessage";
 import SuccessMetricsMessage from "@/components/SuccessMetricsMessage";
-import pagerLogo from '~/welcome/Pager.avif';
+import pagerLogo from "~/welcome/Pager.avif";
 
 export default function Draft() {
   const [content, setContent] = useState("");
@@ -31,6 +31,7 @@ export default function Draft() {
     redFlags: productRedFlags,
     analysis: productAnalysis,
     isLoading: isLoadingPrinciples,
+    isEvaluated: isEvaluatedProductPrinciples,
   } = useEvaluateProductPrinciples(content);
 
   const {
@@ -39,6 +40,7 @@ export default function Draft() {
     targetAudiences,
     analysis: targetAnalysis,
     isLoading: isLoadingTarget,
+    isEvaluated: isEvaluatedTargetAudience,
   } = useEvaluateTargetAudience(content);
 
   const {
@@ -47,6 +49,7 @@ export default function Draft() {
     marketSizeIssue,
     analysis: sizeAnalysis,
     isLoading: isLoadingSize,
+    isEvaluated: isEvaluatedProblemSize,
   } = useEvaluateProblemSize(content);
 
   const {
@@ -54,6 +57,7 @@ export default function Draft() {
     existingProducts,
     hasExistingProducts,
     isLoading: isLoadingExisting,
+    isEvaluated: isEvaluatedExistingProducts,
   } = useEvaluateExistingProducts(content);
 
   // Success Metrics Hooks
@@ -63,6 +67,7 @@ export default function Draft() {
     redFlags: metricsRedFlags,
     analysis: metricsAnalysis,
     isLoading: isLoadingMetrics,
+    isEvaluated: isEvaluatedMetrics,
   } = useEvaluateSuccessMetrics(metricsContent, content);
 
   const isLoading =
@@ -71,6 +76,12 @@ export default function Draft() {
     isLoadingSize ||
     isLoadingExisting ||
     isLoadingMetrics;
+
+  const isEvaluatedProblem =
+    isEvaluatedProductPrinciples &&
+    isEvaluatedTargetAudience &&
+    isEvaluatedProblemSize &&
+    isEvaluatedExistingProducts;
 
   const handleAnalyze = () => {
     setIsAnalyzing(true);
@@ -107,7 +118,7 @@ export default function Draft() {
     showTargetWarning,
     showSizeWarning,
     hasExistingProducts,
-    showMetricsWarning
+    showMetricsWarning,
   ]);
 
   // Get the color based on score
@@ -121,10 +132,12 @@ export default function Draft() {
   // Count issues
   const getIssueCount = () => {
     if (activeTab === "problem") {
-      return (showProductWarning ? 1 : 0) +
+      return (
+        (showProductWarning ? 1 : 0) +
         (showTargetWarning ? 1 : 0) +
         (showSizeWarning ? 1 : 0) +
-        (hasExistingProducts ? 1 : 0);
+        (hasExistingProducts ? 1 : 0)
+      );
     } else {
       return showMetricsWarning ? 1 : 0;
     }
@@ -149,10 +162,14 @@ export default function Draft() {
           </Button>
 
           <Button
-            variant={isAnalyzing ? "outline" : "default"}
+            variant={isLoading ? "outline" : "default"}
             size="sm"
             onClick={handleAnalyze}
-            disabled={isLoading || (!content && activeTab === "problem") || (!metricsContent && activeTab === "metrics")}
+            disabled={
+              isLoading ||
+              (!content && activeTab === "problem") ||
+              (!metricsContent && activeTab === "metrics")
+            }
           >
             {isLoading ? "Analyzing..." : "Analyze"}
           </Button>
@@ -162,23 +179,29 @@ export default function Draft() {
       {/* Main Content - Positioned below the fixed header with proper spacing */}
       <div className="w-full h-full pt-14">
         {/* Editor Area */}
-        <div className={`w-full h-full p-6 ${showSidebar ? 'pr-[350px]' : ''} transition-all duration-300`}>
+        <div
+          className={`w-full h-full p-6 ${
+            showSidebar ? "pr-[350px]" : ""
+          } transition-all duration-300`}
+        >
           {/* Tabs */}
           <div className="flex border-b border-gray-200 mb-4">
             <button
-              className={`px-4 py-2 font-medium text-sm ${activeTab === "problem"
+              className={`px-4 py-2 font-medium text-sm ${
+                activeTab === "problem"
                   ? "text-orange-600 border-b-2 border-orange-600"
                   : "text-gray-500 hover:text-gray-700"
-                }`}
+              }`}
               onClick={() => setActiveTab("problem")}
             >
               Problem Statement
             </button>
             <button
-              className={`px-4 py-2 font-medium text-sm ${activeTab === "metrics"
+              className={`px-4 py-2 font-medium text-sm ${
+                activeTab === "metrics"
                   ? "text-orange-600 border-b-2 border-orange-600"
                   : "text-gray-500 hover:text-gray-700"
-                }`}
+              }`}
               onClick={() => setActiveTab("metrics")}
             >
               Success Metrics
@@ -189,7 +212,9 @@ export default function Draft() {
           <Card className="p-6 shadow-sm bg-white w-full">
             {activeTab === "problem" ? (
               <div className="space-y-4 w-full">
-                <h2 className="text-lg font-medium text-gray-700">Problem Statement</h2>
+                <h2 className="text-lg font-medium text-gray-700">
+                  Problem Statement
+                </h2>
                 <p className="text-sm text-gray-500">
                   Describe the problem, its size, and the target audience.
                 </p>
@@ -202,7 +227,9 @@ export default function Draft() {
               </div>
             ) : (
               <div className="space-y-4 w-full">
-                <h2 className="text-lg font-medium text-gray-700">Success Metrics</h2>
+                <h2 className="text-lg font-medium text-gray-700">
+                  Success Metrics
+                </h2>
                 <p className="text-sm text-gray-500">
                   Define your success metrics and north star metric.
                 </p>
@@ -222,14 +249,19 @@ export default function Draft() {
           <div className="fixed  mt-24 right-0 top-0 bottom-0 w-[350px] bg-white border-l border-gray-200 overflow-y-auto">
             <div className="p-4">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-gray-800">Analysis</h2>
+                <h2 className="text-lg font-semibold text-gray-800">
+                  Analysis
+                </h2>
                 {overallScore !== null && (
                   <div className="flex items-center gap-2">
-                    <div className={`w-10 h-10 rounded-full ${getScoreColor()} flex items-center justify-center text-white font-bold`}>
+                    <div
+                      className={`w-10 h-10 rounded-full ${getScoreColor()} flex items-center justify-center text-white font-bold`}
+                    >
                       {overallScore}
                     </div>
                     <div className="text-sm text-gray-500">
-                      {getIssueCount()} {getIssueCount() === 1 ? 'issue' : 'issues'}
+                      {getIssueCount()}{" "}
+                      {getIssueCount() === 1 ? "issue" : "issues"}
                     </div>
                   </div>
                 )}
@@ -241,54 +273,91 @@ export default function Draft() {
                     <>
                       {hasExistingProducts && (
                         <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg mb-4">
-                          <h3 className="font-medium text-amber-800 mb-2">Similar Products Exist</h3>
-                          <ExistingProductsMessage products={existingProducts} />
+                          <h3 className="font-medium text-amber-800 mb-2">
+                            Similar Products Exist
+                          </h3>
+                          <ExistingProductsMessage
+                            products={existingProducts}
+                          />
                         </div>
                       )}
 
                       {showProductWarning && (
                         <div className="p-4 bg-red-50 border border-red-200 rounded-lg mb-4">
-                          <h3 className="font-medium text-red-800 mb-2">Problem Statement Issues</h3>
-                          <ProductPrinciplesMessage redFlags={productRedFlags} />
-                          <p className="text-sm text-gray-600 mt-2">{productAnalysis}</p>
+                          <h3 className="font-medium text-red-800 mb-2">
+                            Problem Statement Issues
+                          </h3>
+                          <ProductPrinciplesMessage
+                            redFlags={productRedFlags}
+                          />
+                          <p className="text-sm text-gray-600 mt-2">
+                            {productAnalysis}
+                          </p>
                         </div>
                       )}
 
                       {showTargetWarning && (
                         <div className="p-4 bg-red-50 border border-red-200 rounded-lg mb-4">
-                          <h3 className="font-medium text-red-800 mb-2">Target Audience Issues</h3>
-                          <TargetAudienceMessage targetAudiences={targetAudiences} />
-                          <p className="text-sm text-gray-600 mt-2">{targetAnalysis}</p>
+                          <h3 className="font-medium text-red-800 mb-2">
+                            Target Audience Issues
+                          </h3>
+                          <TargetAudienceMessage
+                            targetAudiences={targetAudiences}
+                          />
+                          <p className="text-sm text-gray-600 mt-2">
+                            {targetAnalysis}
+                          </p>
                         </div>
                       )}
 
                       {showSizeWarning && marketSizeIssue && (
                         <div className="p-4 bg-red-50 border border-red-200 rounded-lg mb-4">
-                          <h3 className="font-medium text-red-800 mb-2">Problem Size Issues</h3>
-                          <ProblemSizeMessage marketSizeIssue={marketSizeIssue} />
-                          <p className="text-sm text-gray-600 mt-2">{sizeAnalysis}</p>
+                          <h3 className="font-medium text-red-800 mb-2">
+                            Problem Size Issues
+                          </h3>
+                          <ProblemSizeMessage
+                            marketSizeIssue={marketSizeIssue}
+                          />
+                          <p className="text-sm text-gray-600 mt-2">
+                            {sizeAnalysis}
+                          </p>
                         </div>
                       )}
 
-                      {!showProductWarning && !showTargetWarning && !showSizeWarning && !hasExistingProducts && (
+                      {isEvaluatedProblem && (
                         <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                          <h3 className="font-medium text-green-800 mb-2">Excellent Work!</h3>
-                          <p className="text-sm text-gray-600">Your problem statement looks great. No issues detected.</p>
+                          <h3 className="font-medium text-green-800 mb-2">
+                            Excellent Work!
+                          </h3>
+                          <p className="text-sm text-gray-600">
+                            Your problem statement looks great. No issues
+                            detected.
+                          </p>
                         </div>
                       )}
                     </>
                   ) : (
                     <>
-                      {showMetricsWarning ? (
+                      {showMetricsWarning && (
                         <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                          <h3 className="font-medium text-red-800 mb-2">Success Metrics Issues</h3>
+                          <h3 className="font-medium text-red-800 mb-2">
+                            Success Metrics Issues
+                          </h3>
                           <SuccessMetricsMessage redFlags={metricsRedFlags} />
-                          <p className="text-sm text-gray-600 mt-2">{metricsAnalysis}</p>
+                          <p className="text-sm text-gray-600 mt-2">
+                            {metricsAnalysis}
+                          </p>
                         </div>
-                      ) : (
+                      )}
+
+                      {isEvaluatedMetrics && (
                         <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                          <h3 className="font-medium text-green-800 mb-2">Excellent Work!</h3>
-                          <p className="text-sm text-gray-600">Your success metrics look great. No issues detected.</p>
+                          <h3 className="font-medium text-green-800 mb-2">
+                            Excellent Work!
+                          </h3>
+                          <p className="text-sm text-gray-600">
+                            Your success metrics look great. No issues detected.
+                          </p>
                         </div>
                       )}
                     </>
@@ -297,13 +366,30 @@ export default function Draft() {
               ) : (
                 <div className="flex flex-col items-center justify-center h-[70vh] text-center">
                   <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 text-orange-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-700 mb-2">Ready to analyze</h3>
+                  <h3 className="text-lg font-medium text-gray-700 mb-2">
+                    Ready to analyze
+                  </h3>
                   <p className="text-sm text-gray-500 max-w-xs">
-                    Click the "Analyze" button to get feedback on your {activeTab === "problem" ? "problem statement" : "success metrics"}.
+                    Click the "Analyze" button to get feedback on your{" "}
+                    {activeTab === "problem"
+                      ? "problem statement"
+                      : "success metrics"}
+                    .
                   </p>
                 </div>
               )}

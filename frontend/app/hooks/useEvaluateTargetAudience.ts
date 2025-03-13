@@ -37,6 +37,7 @@ export function useEvaluateTargetAudience(problemStatement: string) {
   return {
     evaluate,
     isLoading,
+    isEvaluated: assessment !== null && assessment.targetAudiences.length === 1,
     showWarning: (assessment?.targetAudiences ?? []).length > 1,
     targetAudiences: assessment?.targetAudiences ?? [],
     analysis: assessment?.analysis,

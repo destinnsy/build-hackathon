@@ -35,6 +35,7 @@ export function useEvaluateProductPrinciples(problemStatement: string) {
   return {
     evaluate,
     isLoading,
+    isEvaluated: assessment !== null && assessment.evaluation === "good",
     showWarning: assessment?.evaluation === "bad",
     redFlags: assessment?.redFlags ?? [],
     analysis: assessment?.analysis,
