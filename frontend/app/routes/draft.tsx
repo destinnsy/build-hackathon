@@ -14,6 +14,7 @@ import TargetAudienceMessage from "@/components/TargetAudienceMessage";
 import ProblemSizeMessage from "@/components/ProblemSizeMessage";
 import ExistingProductsMessage from "@/components/ExistingProductsMessage";
 import SuccessMetricsMessage from "@/components/SuccessMetricsMessage";
+import pagerLogo from '~/welcome/Pager.avif';
 
 export default function Draft() {
   const [content, setContent] = useState("");
@@ -87,7 +88,7 @@ export default function Draft() {
   useEffect(() => {
     if (isAnalyzing) {
       let score = 100;
-      
+
       if (activeTab === "problem") {
         if (showProductWarning) score -= 20;
         if (showTargetWarning) score -= 20;
@@ -96,7 +97,7 @@ export default function Draft() {
       } else {
         if (showMetricsWarning) score -= 30;
       }
-      
+
       setOverallScore(Math.max(score, 0));
     }
   }, [
@@ -120,34 +121,35 @@ export default function Draft() {
   // Count issues
   const getIssueCount = () => {
     if (activeTab === "problem") {
-      return (showProductWarning ? 1 : 0) + 
-             (showTargetWarning ? 1 : 0) + 
-             (showSizeWarning ? 1 : 0) + 
-             (hasExistingProducts ? 1 : 0);
+      return (showProductWarning ? 1 : 0) +
+        (showTargetWarning ? 1 : 0) +
+        (showSizeWarning ? 1 : 0) +
+        (hasExistingProducts ? 1 : 0);
     } else {
       return showMetricsWarning ? 1 : 0;
     }
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
-      {/* Header */}
-      <div className="fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center px-4 z-10">
-        <h1 className="text-xl font-semibold text-blue-600">
-          Pager  
-        </h1>
-        
+    <div className="flex flex-col h-screen overflow-hidden bg-gray-50">
+      {/* Header - Fixed at the top below the masthead */}
+      <div className="fixed left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center px-4 z-10">
+        <div className="text-xl font-bold flex items-center">
+          <img src={pagerLogo} alt="Pager Logo" className="h-6 w-6 mr-2" />
+          Pager
+        </div>
+
         <div className="ml-auto flex items-center gap-2">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
             onClick={() => setShowSidebar(!showSidebar)}
           >
             {showSidebar ? "Hide Analysis" : "Show Analysis"}
           </Button>
-          
-          <Button 
-            variant={isAnalyzing ? "outline" : "default"} 
+
+          <Button
+            variant={isAnalyzing ? "outline" : "default"}
             size="sm"
             onClick={handleAnalyze}
             disabled={isLoading || (!content && activeTab === "problem") || (!metricsContent && activeTab === "metrics")}
@@ -157,28 +159,26 @@ export default function Draft() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex w-full mt-14">
+      {/* Main Content - Positioned below the fixed header with proper spacing */}
+      <div className="w-full h-full pt-14">
         {/* Editor Area */}
-        <div className={`flex-1 p-6 ${showSidebar ? 'mr-[350px]' : ''} transition-all duration-300`}>
+        <div className={`w-full h-full p-6 ${showSidebar ? 'pr-[350px]' : ''} transition-all duration-300`}>
           {/* Tabs */}
           <div className="flex border-b border-gray-200 mb-4">
             <button
-              className={`px-4 py-2 font-medium text-sm ${
-                activeTab === "problem"
+              className={`px-4 py-2 font-medium text-sm ${activeTab === "problem"
                   ? "text-blue-600 border-b-2 border-blue-600"
                   : "text-gray-500 hover:text-gray-700"
-              }`}
+                }`}
               onClick={() => setActiveTab("problem")}
             >
               Problem Statement
             </button>
             <button
-              className={`px-4 py-2 font-medium text-sm ${
-                activeTab === "metrics"
+              className={`px-4 py-2 font-medium text-sm ${activeTab === "metrics"
                   ? "text-blue-600 border-b-2 border-blue-600"
                   : "text-gray-500 hover:text-gray-700"
-              }`}
+                }`}
               onClick={() => setActiveTab("metrics")}
             >
               Success Metrics
@@ -186,28 +186,28 @@ export default function Draft() {
           </div>
 
           {/* Editor */}
-          <Card className="p-6 shadow-sm bg-white">
+          <Card className="p-6 shadow-sm bg-white w-full">
             {activeTab === "problem" ? (
-              <div className="space-y-4">
+              <div className="space-y-4 w-full">
                 <h2 className="text-lg font-medium text-gray-700">Problem Statement</h2>
                 <p className="text-sm text-gray-500">
                   Describe the problem, its size, and the target audience.
                 </p>
                 <Textarea
-                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-blue-500 focus:ring-blue-500 w-full"
                   placeholder="Describe the problem you're trying to solve..."
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-4 w-full">
                 <h2 className="text-lg font-medium text-gray-700">Success Metrics</h2>
                 <p className="text-sm text-gray-500">
                   Define your success metrics and north star metric.
                 </p>
                 <Textarea
-                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                  className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-blue-500 focus:ring-blue-500 w-full"
                   placeholder="Describe your success metrics and north star metric..."
                   value={metricsContent}
                   onChange={(e) => setMetricsContent(e.target.value)}
@@ -219,7 +219,7 @@ export default function Draft() {
 
         {/* Sidebar */}
         {showSidebar && (
-          <div className="fixed right-0 top-14 bottom-0 w-[350px] bg-white border-l border-gray-200 overflow-y-auto">
+          <div className="fixed  mt-24 right-0 top-0 bottom-0 w-[350px] bg-white border-l border-gray-200 overflow-y-auto">
             <div className="p-4">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-gray-800">Analysis</h2>
