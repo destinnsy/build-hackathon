@@ -41,7 +41,7 @@ export default function Tools() {
             description: "AI writing Assistant provides real-time guidance as you craft your funding proposal, offering suggestions to enhance clarity, structure, and alignment with IB/CDB requirements",
             icon: "🔍",
             category: "assistance",
-            url: "https://www.notion.so/Competitor-Analysis-Template-e7bd7c5e9b8f4f8a9e8f9f9f9f9f9f9f"
+            url: "https://pager-app-seven.vercel.app/"
         },
         {
             id: "product-clinic",
@@ -120,7 +120,7 @@ export default function Tools() {
             {/* Main Content - Positioned below the fixed header with proper spacing */}
             <div className="w-full h-full pt-14">
                 {/* Tools Grid */}
-                <div className={`w-full h-full p-6 ${showSidebar ? 'pr-[350px]' : ''} transition-all duration-300`}>
+                <div className={`w-full h-full p-6 pr-[350px]`}>
                     <h2 className="text-2xl font-semibold text-gray-800 mb-6">Product Resources</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
