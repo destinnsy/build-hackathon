@@ -321,6 +321,25 @@ Where:
 - `analysis`: A concise explanation (2-4 sentences) of your assessment, focusing on the issues if any exist or explaining why the metrics are effective if no issues exist
 
 Remember to evaluate only what is present in the input and avoid making assumptions about unstated elements. Your goal is to provide a fair, thorough assessment that helps improve the alignment between the problem statement and its success metrics.
+
+## Examples
+
+**Input**:
+```
+   # Problem
+   Today, 50 agencies (across the environmental, construction, manpower, and healthcare sectors) deal with the collection of a combined total of 200 kinds of permits. Currently, the permit verification process is completely manual. It takes each officer an average of 14 working days to finish processing a permit. We found that 75% of 2883 permit applicants surveyed end up missing a deadline because of this delay. This results in a loss of an average of $200 per permit. Applicants surveyed expected permits to be processed within a median time of 3.5 days.",
+
+   # Success Metrics
+   Number of permits processed within 3 working days on a monthly basis
+```
+
+**Output**:
+{{ 
+  "evaluation": "true",
+  "issues": [],
+  "analysis": "The success metric of "Number of permits processed within 3 working days on a monthly basis" directly addresses the problem by aligning permit processing times with applicant expectations, which is a median of 3.5 days. It aims to reduce the current average processing time of 14 working days, thereby minimizing delays that cause 75% of applicants to miss deadlines and incur a financial loss of $200 per permit. This metric focuses on improving efficiency, reducing manual processing delays, and meeting applicants' expectations, all of which are crucial for reducing costs and enhancing the permit approval process."
+}}
+
 """
 
 summarizer_prompt = """
