@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 
 interface Tool {
   id: string;
@@ -8,6 +9,7 @@ interface Tool {
   description: string;
   icon: string;
   category: string;
+  url: string;
 }
 
 export default function Tools() {
@@ -17,47 +19,44 @@ export default function Tools() {
 
   const tools: Tool[] = [
     {
-      id: "problem-analyzer",
-      name: "Problem Statement Analyzer",
-      description: "Analyze your problem statement for clarity, focus, and completeness.",
+      id: "product-guide",
+      name: "Product Guide",
+      description: "Comprehensive guide by SNDG to help you build effective and efficient digital products",
+      icon: "⛩️",
+      category: "strategy",
+      url: "https://gccprod.sharepoint.com/sites/MDDI-products/SitePages/Product-Guide-Introduction.aspx"
+    },
+    {
+      id: "product-strategy",
+      name: "Product Strategy One-Pager template",
+      description: "This template provides a framework for presenting your product's core value proposition, risk mitigation strategy, and resource ask required for IB / CDB funding application",
       icon: "📝",
-      category: "analysis"
-    },
+      category: "template",
+      url: "https://go.gov.sg/onepagertemplate"
+    }, 
     {
-      id: "audience-finder",
-      name: "Target Audience Finder",
-      description: "Identify and validate your target audience from your problem statement.",
-      icon: "👥",
-      category: "analysis"
-    },
-    {
-      id: "metrics-validator",
-      name: "Success Metrics Validator",
-      description: "Ensure your success metrics are measurable, relevant, and achievable.",
-      icon: "📊",
-      category: "validation"
-    },
-    {
-      id: "competitor-analysis",
-      name: "Competitor Analysis",
-      description: "Discover existing products that might address similar problems.",
+      id: "ai-assistant",
+      name: "One-Pager AI Writing Assistant",
+      description: "AI writing Assistant provides real-time guidance as you craft your funding proposal, offering suggestions to enhance clarity, structure, and alignment with IB/CDB requirements",
       icon: "🔍",
-      category: "discovery"
+      category: "assistance",
+      url: "https://www.notion.so/Competitor-Analysis-Template-e7bd7c5e9b8f4f8a9e8f9f9f9f9f9f9f"
     },
     {
-      id: "problem-size-estimator",
-      name: "Problem Size Estimator",
-      description: "Estimate the size and impact of the problem you're addressing.",
-      icon: "📏",
-      category: "analysis"
+      id: "product-clinic",
+      name: "Product Clinic Office Hours",
+      description: "Join our product clinics for IB funding guidance and get early proposal feedback to increase your funding approval chances.",
+      icon: "💊",
+      category: "assistance",
+      url: "https://cal.gov.sg/pfjkrmd777epf6on4gpz0gbe"
     },
   ];
 
   const categories = [
-    { id: "all", name: "All Tools" },
-    { id: "analysis", name: "Analysis" },
-    { id: "validation", name: "Validation" },
-    { id: "discovery", name: "Discovery" },
+    { id: "all", name: "All Resources" },
+    { id: "strategy", name: "Product Strategy" },
+    { id: "template", name: "Template & Resources" },
+    { id: "assistance", name: "Help & Assistance" },
   ];
 
   const filteredTools = tools.filter(tool => 
@@ -66,12 +65,19 @@ export default function Tools() {
     tool.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
+  // Function to handle external links
+  const handleToolClick = (url: string) => {
+    if (url.startsWith('http')) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50">
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center px-4 z-10">
         <h1 className="text-xl font-semibold text-blue-600">
-          Pager <span className="text-gray-500 text-sm font-normal">| Tools</span>
+          Pager  
         </h1>
         
         <div className="ml-auto flex items-center gap-2">
@@ -113,7 +119,7 @@ export default function Tools() {
       <div className="flex w-full mt-14">
         {/* Tools Grid */}
         <div className={`flex-1 p-6 ${showSidebar ? 'mr-[350px]' : ''} transition-all duration-300`}>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Available Tools</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Product Resources</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredTools.map((tool) => (
@@ -123,9 +129,36 @@ export default function Tools() {
                   <div>
                     <h3 className="text-lg font-medium text-gray-800 mb-2">{tool.name}</h3>
                     <p className="text-gray-600 mb-4">{tool.description}</p>
-                    <Button variant="default" size="sm">
-                      Open Tool
-                    </Button>
+                    {tool.url.startsWith('http') ? (
+                      <Button 
+                        variant="default" 
+                        size="sm"
+                        onClick={() => handleToolClick(tool.url)}
+                        className="flex items-center gap-1"
+                      >
+                        Learn more
+                        <svg 
+                          className="h-4 w-4" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24" 
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                            strokeWidth={2} 
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" 
+                          />
+                        </svg>
+                      </Button>
+                    ) : (
+                      <Link to={tool.url}>
+                        <Button variant="default" size="sm">
+                          Learn more
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -149,9 +182,9 @@ export default function Tools() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium text-gray-700 mb-2">No tools found</h3>
+                <h3 className="text-lg font-medium text-gray-700 mb-2">No resources found</h3>
                 <p className="text-gray-500 max-w-md">
-                  We couldn't find any tools matching your search. Try adjusting your search terms or category.
+                  We couldn't find any resources matching your search. Try adjusting your search terms or category.
                 </p>
               </div>
             )}
@@ -198,13 +231,6 @@ export default function Tools() {
                     )}
                   </button>
                 ))}
-              </div>
-              
-              <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-                <h3 className="font-medium text-blue-800 mb-2">Tool Categories</h3>
-                <p className="text-sm text-gray-600">
-                  Select a category to filter the available tools. Each category contains tools designed for specific aspects of your proposal development process.
-                </p>
               </div>
             </div>
           </div>

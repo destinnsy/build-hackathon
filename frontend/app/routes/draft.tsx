@@ -134,7 +134,7 @@ export default function Draft() {
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 flex items-center px-4 z-10">
         <h1 className="text-xl font-semibold text-blue-600">
-          Pager <span className="text-gray-500 text-sm font-normal">| AI-powered funding proposal editor</span>
+          Pager  
         </h1>
         
         <div className="ml-auto flex items-center gap-2">

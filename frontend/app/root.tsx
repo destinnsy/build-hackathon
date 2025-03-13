@@ -61,7 +61,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   }`
                 }
               >
-                Writing
+                Analyzer
               </NavLink>
             </li>
             <li>
@@ -75,7 +75,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   }`
                 }
               >
-                Tools
+                Resources
               </NavLink>
             </li>
           </ul>
