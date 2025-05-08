@@ -164,6 +164,15 @@ A focused problem statement should address one core problem area. Look for:
   "redFlags": ["solution_focus", "insufficient_depth", "multiple_distinct_problems"],
   "analysis": "This problem statement mentions multiple problems of (1) inconsistency in tech stacks, (2) duplication of effort across Government agencies, as well as (2) lack of resilience. Each problem cited also has its issues: for problem 1, it does not explain why inconsistency in tech stacks is an important problem to solve, and cites multiple target audiences (agencies and vendors). Problem 2 also does not quantify the cost of duplicated effort, and problem 3 is focused around a solution and does not describe a problem."
 }}
+
+**Input**: "Singapore’s rapidly ageing population faces a significant challenge with social isolation in older adults above the age of 65. As of 2024, the proportion of citizens aged 65 and above is 19.4%, which is estimated to grow to 25% by 2030 (approximately 1.72 million citizens). In an NUS study conducted involving more than 17,000 older adults aged 61 to 96 years, it was found that almost 4 in 5 elderly who are socially isolated lived with their families, and 3 in 20 elderly who were living on their own. Social isolation has significant implications on individual health, resulting in higher rates of mental and physical health problems. These consequences create a compounding effect such as increased healthcare costs due to preventable health conditions, greater strain on caregivers and care facilities, growing intergenerational divide and strained family relationships, not to mention lost economic potential and cultural knowledge from untapped senior experiences. Despite existing community support programmes, the current approach is fragmented, with siloed initiatives, top-down planning, and accessibility barriers that do not fully consider the needs of the elderly demographic. Many seniors remain unaware of available resources, while others face barriers such as mobility issues, language differences, digital literacy that prevent them from accessing support services. The programmes tend to be one-off events instead of sustained programmes that build lasting relationships across generations and focus on passive entertainment rather than provide meaningful engagement, learning or skill utilisation. A coordinated, user-centric solution is needed to create sustainable community engagement that respects their experiences, autonomy and dignity while fostering meaningful social connections. "
+
+**Output**:
+{{ 
+  "evaluation": "bad",
+  "redFlags": [“insufficient_depth”, "multiple_distinct_problems"],
+  "analysis": "The main problem lacks clarity and focus—is the primary concern: Social isolation itself? Lack of sustained community engagement? Failure of existing programs to meet seniors’ needs? Without a clear focal point, the solution tries to address several issues at once, making it less targeted. The cause-and-effect relationship needs sharper articulation— it is not clear how current program gaps directly lead to social isolation."
+}}
 """
 
 analyze_problem_size_prompt = """
