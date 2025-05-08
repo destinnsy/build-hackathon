@@ -108,7 +108,7 @@ A focused problem statement should address one core problem area. Look for:
 2. Then, determine if there's enough context to understand why this problem matters
 3. Next, assess whether the statement focuses on a single coherent problem or multiple distinct problems
 4. If any of the three red flags are present, the evaluation should be "bad". A "good" evaluation should be reserved for problem statements that are focused, user-centric, and sufficiently detailed
-5. Provide a clear analysis explaining your reasoning and which specific red flag(s) were found
+5. Provide a clear analysis explaining your reasoning and which specific red flag(s) were found. Provide a clear analysis explaining your reasoning if no red flag(s) were found.
 
 ## Examples
 
