@@ -252,12 +252,12 @@ export default function Draft() {
                 <h2 className="text-lg font-semibold text-gray-800">
                   Analysis
                 </h2>
-                {overallScore !== null && (
+{/*                 {overallScore !== null && (
                   <div className="flex items-center gap-2">
                     <div
                       className={`w-10 h-10 rounded-full ${getScoreColor()} flex items-center justify-center text-white font-bold`}
                     >
-                      {overallScore}
+                      {overallScore} */}
                     </div>
                     <div className="text-sm text-gray-500">
                       {getIssueCount()}{" "}
