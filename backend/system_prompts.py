@@ -327,13 +327,14 @@ You must return ONLY a JSON object with the following structure:
 
 ```json
 {{
-  "evaluation": "good" or "bad",
+  "evaluation": boolean,
   "issues": ["relevance", "objectivity", "specificity", "high-frequency"],
   "analysis": "Your explanation on why the judgement of the success metrics"
 }}
 ```
 
 Where:
+- `evaluation`: `true` if the success metrics are acceptable across all criteria, `false` if there are any issues
 - `issues`: An array containing the names of criteria that have issues. Include only the criteria names that fail. If there are no issues, return `null` for this field
 - `analysis`: A concise explanation (2-4 sentences) of your assessment, focusing on the issues if any exist or explaining why the metrics are effective if no issues exist
 
@@ -352,7 +353,7 @@ Remember to evaluate only what is present in the input and avoid making assumpti
 
 **Output**:
 {{ 
-  "evaluation": "good",
+  "evaluation": "true",
   "issues": [],
   "analysis": "The success metric of "Number of permits processed within 3 working days on a monthly basis" directly addresses the problem by aligning permit processing times with applicant expectations, which is a median of 3.5 days, from the current average processing time of 14 working days. Increases in the number of permits processed within 3 working days on a monthly basis will allow less applicants to end up missing a deadline, and avoid the loss of an average of $200 per permit."
 }}
@@ -368,7 +369,7 @@ Remember to evaluate only what is present in the input and avoid making assumpti
 
 **Output**:
 {{ 
-  "evaluation": "bad",
+  "evaluation": "false",
   "issues": [“relevance”, “specificity”],
   "analysis": "The success metric of "Number of transactions" does not directly address the problem. Firstly, it is unclear if transactions refer to applications submitted or approved, although the problem is around long application submission time. The metric also does not reflect the time taken for each transaction; if the new system continues to take 40 minutes per application, the new system would not have solved the problem. A better metric would be number of applications submitted within 10 minutes from application launch, which clearly ensures that the problem of long application submission time is solved, and is specific about the start and end points of the application transaction."
 }}
@@ -384,7 +385,7 @@ Remember to evaluate only what is present in the input and avoid making assumpti
 
 **Output**:
 {{ 
-  "evaluation": "bad",
+  "evaluation": "false",
   "issues": ["objectivity"],
   "analysis": "The success metric of "Amount of time saved per case, based on survey of caseworkers" directly addresses the problem. However, it is based on the subjective opinions of caseworkers on the estimated time they save per case, which could differ from case to case as well as be subject to personal bias. A better metric would have been the number of cases that were resolved within 4 days which can be objectively tracked."
 }}
@@ -400,7 +401,7 @@ Remember to evaluate only what is present in the input and avoid making assumpti
 
 **Output**:
 {{ 
-  "evaluation": "bad",
+  "evaluation": "false",
   "issues": [“high-frequency”, “specificity”],
   "analysis": "The success metric of "Loss avoidance based on yearly collation of true positive cases identified by solution" directly addresses the problem. However, it is based on a yearly collation that makes it slow to react to changes in the solution. A better metric would be loss avoidance based on quarterly collation, or the number of cases identified that were verified to be fraudulent."
 }}
