@@ -310,6 +310,7 @@ Assessment questions:
 - Are the metrics defined with enough detail and clarity that two people could calculate them independently and get the same result?
 - Are all terms and components of the metrics defined such that someone with no context could understand?
 - Is there a scientific level of precision in the metric description?
+- Does the metric give a sense of the size of the solution's impact?
 
 ### 4. High-Frequency
 Determine whether the metrics can quickly reflect changes in the solution implementation.
