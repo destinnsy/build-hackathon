@@ -257,8 +257,8 @@ export default function Draft() {
                     <div
                       className={`w-10 h-10 rounded-full ${getScoreColor()} flex items-center justify-center text-white font-bold`}
                     >
-                      {overallScore} */}
-                    </div>
+                      {overallScore} 
+                    </div>*/}
                     <div className="text-sm text-gray-500">
                       {getIssueCount()}{" "}
                       {getIssueCount() === 1 ? "issue" : "issues"}
