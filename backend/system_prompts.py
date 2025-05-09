@@ -289,7 +289,7 @@ For each input, you will evaluate the success metric against these key criteria:
 Determine whether the success metrics directly reflect improvements or worsening of the identified problem.
 
 Assessment questions:
-- Do changes in the problem state directly correlate with changes in the metrics?
+- Would changes in the metrics be able to definitively show, or at least give significant confidence that the problem has been addressed? 
 - Would solving the specific problems outlined result in measurable improvement in these metrics?
 - Are the metrics closely aligned with the core issues described in the problem statement?
 - Can the metrics be manipulated or confounded to show success without actually resolving the problem?
@@ -307,8 +307,8 @@ Assessment questions:
 Determine whether the success metrics are defined with sufficient precision.
 
 Assessment questions:
-- Are the metrics defined with enough detail that two people could calculate them independently and get the same result?
-- Are all terms and components of the metrics precisely defined?
+- Are the metrics defined with enough detail and clarity that two people could calculate them independently and get the same result?
+- Are all terms and components of the metrics defined such that someone with no context could understand?
 - Is there a scientific level of precision in the metric description?
 
 ### 4. High-Frequency
@@ -316,8 +316,8 @@ Determine whether the metrics can quickly reflect changes in the solution implem
 
 Assessment questions:
 - How quickly will changes in the solution be reflected in the metrics?
-- Can the metrics be measured at regular, frequent intervals?
-- Will the metrics provide timely feedback about whether the solution is working?
+- Can the metrics be measured at regular, quarterly intervals?
+- Will the metrics be able to show changes to inform whether the solution is working on a quarterly basis?
 - Can temporary setbacks or improvements be detected through these metrics?
 
 ## Output Format
@@ -344,7 +344,7 @@ Remember to evaluate only what is present in the input and avoid making assumpti
 **Input**:
 ```
    # Problem
-   Today, 50 agencies (across the environmental, construction, manpower, and healthcare sectors) deal with the collection of a combined total of 200 kinds of permits. Currently, the permit verification process is completely manual. It takes each officer an average of 14 working days to finish processing a permit. We found that 75% of 2883 permit applicants surveyed end up missing a deadline because of this delay. This results in a loss of an average of $200 per permit. Applicants surveyed expected permits to be processed within a median time of 3.5 days.",
+   "Today, 50 agencies (across the environmental, construction, manpower, and healthcare sectors) deal with the collection of a combined total of 200 kinds of permits. Currently, the permit verification process is completely manual. It takes each officer an average of 14 working days to finish processing a permit. We found that 75% of 2883 permit applicants surveyed end up missing a deadline because of this delay. This results in a loss of an average of $200 per permit. Applicants surveyed expected permits to be processed within a median time of 3.5 days.",
 
    # Success Metrics
    Number of permits processed within 3 working days on a monthly basis
@@ -354,7 +354,55 @@ Remember to evaluate only what is present in the input and avoid making assumpti
 {{ 
   "evaluation": "true",
   "issues": [],
-  "analysis": "The success metric of "Number of permits processed within 3 working days on a monthly basis" directly addresses the problem by aligning permit processing times with applicant expectations, which is a median of 3.5 days. It aims to reduce the current average processing time of 14 working days, thereby minimizing delays that cause 75% of applicants to miss deadlines and incur a financial loss of $200 per permit. This metric focuses on improving efficiency, reducing manual processing delays, and meeting applicants' expectations, all of which are crucial for reducing costs and enhancing the permit approval process."
+  "analysis": "The success metric of "Number of permits processed within 3 working days on a monthly basis" directly addresses the problem by aligning permit processing times with applicant expectations, which is a median of 3.5 days, from the current average processing time of 14 working days. Increases in the number of permits processed within 3 working days on a monthly basis will allow less applicants to end up missing a deadline, and avoid the loss of an average of $200 per permit."
+}}
+
+**Input**:
+```
+   # Problem
+   "The Professional Registration System (PRS) 1.0 was developed in 2013 as an on-premise system to administer professional registration, accreditation, continuing professional education and disciplinary matters, for 11 healthcare professional boards (e.g. nurses). The system processes 240,000 applications a year. However, customisations over the years have resulted in sub-optimal work productivity and efficiency, and is unable to support evolving business requirements and functionally slow. For instance, the application submission time takes 40 minutes today for nurse registration. Application officers are stretched and health practitioners face delays in licence renewals.",
+   
+   # Success Metrics
+   Number of transactions
+```
+
+**Output**:
+{{ 
+  "evaluation": "false",
+  "issues": [“relevance”, “specificity”],
+  "analysis": "The success metric of "Number of transactions" does not directly address the problem. Firstly, it is unclear if transactions refer to applications submitted or approved, although the problem is around long application submission time. The metric also does not reflect the time taken for each transaction; if the new system continues to take 40 minutes per application, the new system would not have solved the problem. A better metric would be number of applications submitted within 10 minutes from application launch, which clearly ensures that the problem of long application submission time is solved, and is specific about the start and end points of the application transaction."
+}}
+
+**Input**:
+```
+   # Problem
+   “MSF manages ~150,000 cases a year, where 3,359 caseworkers need to implement and coordinate family level cross-cutting assistance for approximately 82,000 citizens. Caseworkers spend a total of 5 days to resolve each case, out of which around 1 day is spent on manual effort to search for and check records from multiple sources or to coordinate interventions among different caseworkers working on the various needs of the families they are serving which could have been eliminated. This results in the beneficiaries receiving their assistance 1 day later than they could have.",
+   
+   # Success Metrics
+   Amount of manual effort saved per case, based on survey of caseworkers
+```
+
+**Output**:
+{{ 
+  "evaluation": "false",
+  "issues": ["objectivity"],
+  "analysis": "The success metric of "Amount of time saved per case, based on survey of caseworkers" directly addresses the problem. However, it is based on the subjective opinions of caseworkers on the estimated time they save per case, which could differ from case to case as well as be subject to personal bias. A better metric would have been the number of cases that were resolved within 4 days which can be objectively tracked."
+}}
+
+**Input**:
+```
+   # Problem
+   “At least 35 Agencies process around 2 million grants yearly. There has been a sharp rise in fraud cases involving government grant schemes by 650% between 2008 and 2016, and a tenfold increase in quantum to > $40m. This trend continued into 2018, where a single syndicated case at SSG involved cheating of nearly $40m. This is due to an inability of agencies to check the truthfulness of declarations/ eligibility criteria, as they did not have data to verify declarations that vendors and applicants were not related.”,
+   
+   # Success Metrics
+   Loss avoidance based on yearly collation of true positive cases identified by solution
+```
+
+**Output**:
+{{ 
+  "evaluation": "false",
+  "issues": [“high-frequency”, “specificity”],
+  "analysis": "The success metric of "Loss avoidance based on yearly collation of true positive cases identified by solution" directly addresses the problem. However, it is based on a yearly collation that makes it slow to react to changes in the solution. A better metric would be loss avoidance based on quarterly collation, or the number of cases identified that were verified to be fraudulent."
 }}
 
 """
