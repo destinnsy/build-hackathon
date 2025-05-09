@@ -204,7 +204,7 @@ export default function Draft() {
               }`}
               onClick={() => setActiveTab("metrics")}
             >
-              Success Metrics
+              Value Metric
             </button>
           </div>
 
@@ -228,14 +228,14 @@ export default function Draft() {
             ) : (
               <div className="space-y-4 w-full">
                 <h2 className="text-lg font-medium text-gray-700">
-                  Success Metrics
+                  Value Metric
                 </h2>
                 <p className="text-sm text-gray-500">
-                  Define your success metrics and north star metric.
+                  Define your value metric (long-term north star).
                 </p>
                 <Textarea
                   className="min-h-[70vh] text-base p-4 border-gray-200 focus:border-orange-500 focus:ring-orange-500 w-full"
-                  placeholder="Describe your success metrics and north star metric..."
+                  placeholder="Describe your value metric..."
                   value={metricsContent}
                   onChange={(e) => setMetricsContent(e.target.value)}
                 />
@@ -332,7 +332,7 @@ export default function Draft() {
                       {showMetricsWarning && (
                         <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
                           <h3 className="font-medium text-red-800 mb-2">
-                            Success Metrics Issues
+                            Value Metric Issues
                           </h3>
                           <SuccessMetricsMessage redFlags={metricsRedFlags} />
                           <p className="text-sm text-gray-600 mt-2">
@@ -347,7 +347,7 @@ export default function Draft() {
                             Excellent Work!
                           </h3>
                           <p className="text-sm text-gray-600">
-                            Your success metrics look great. No issues detected.
+                            Your value metric look great. No issues detected.
                           </p>
                         </div>
                       )}
