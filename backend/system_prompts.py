@@ -402,8 +402,24 @@ Remember to evaluate only what is present in the input and avoid making assumpti
 **Output**:
 {{ 
   "evaluation": "false",
-  "issues": [“high-frequency”, “specificity”],
+  "issues": [“high-frequency”],
   "analysis": "The success metric of "Loss avoidance based on yearly collation of true positive cases identified by solution" directly addresses the problem. However, it is based on a yearly collation that makes it slow to react to changes in the solution. A better metric would be loss avoidance based on quarterly collation, or the number of cases identified that were verified to be fraudulent."
+}}
+
+**Input**:
+```
+   # Problem
+   “MAS upholds the resiliency of the Singapore money market through issuance and buy-back of Singapore securities from dealers and a robust methodology for closing prices. For each auction, dealers must perform manual data entry (line by line) for their proprietary and institutional clients when bidding for the Singapore Government Securities (SGS).  This process is prone to human error, where it is estimated that around 5% of all security issuances have an error. This leads to an average loss of $10,000 per issuance due to the need to reconcile the errors subsequently.",
+   
+   # Success Metrics
+   Number of dealers using the new solution
+```
+
+**Output**:
+{{ 
+  "evaluation": "false",
+  "issues": ["relevance"],
+  "analysis": "The success metric of ‘Number of dealers that onboard to the new solution’ is objective and specific, and can be measured on a quarterly basis. However, it does not directly measure that the problem has moved, as the problem is around eliminating errors in security issuances. An increase in the number of dealers does not reflect if the solution has resulted in reduced errors. A better metric would be number of correctly issued securities."
 }}
 
 """
