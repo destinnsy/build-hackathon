@@ -252,7 +252,10 @@ export default function Draft() {
                 <h2 className="text-lg font-semibold text-gray-800">
                   Analysis
                 </h2>
-                
+                    <div className="text-sm text-gray-500">
+                      {getIssueCount()}{" "}
+                      {getIssueCount() === 1 ? "issue" : "issues"}
+                    </div>
               </div>
 
               {isAnalyzing ? (
