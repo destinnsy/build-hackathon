@@ -28,8 +28,8 @@ export default function Tools() {
         },
         {
             id: "product-strategy",
-            name: "Product Strategy One-Pager template",
-            description: "This template provides a framework for presenting your product's core value proposition, risk mitigation strategy, and resource ask required for IB / CDB funding application",
+            name: "Product One-Pager template",
+            description: "This template provides a framework for presenting your product's core problem, strategy, value, and risk mitigation strategy",
             icon: "📝",
             category: "template",
             url: "https://go.gov.sg/onepagertemplate"
