@@ -45,6 +45,6 @@ class UserQueryMetrics(BaseModel):
 def query_success_metrics(query: UserQueryMetrics):
   return json.loads(summarize_problem_statement(query.problemText, query.metricsText))
 
-@app.post("/query/existing-products")
-def query_existing_products(query: UserQuery):
-  return analyze_existing_products(query.text)
+# @app.post("/query/existing-products")
+# def query_existing_products(query: UserQuery):
+#   return analyze_existing_products(query.text)
