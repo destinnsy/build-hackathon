@@ -204,7 +204,7 @@ export default function Draft() {
               }`}
               onClick={() => setActiveTab("metrics")}
             >
-              Value Metric
+              Value Metric (WIP!)
             </button>
           </div>
 
@@ -228,7 +228,7 @@ export default function Draft() {
             ) : (
               <div className="space-y-4 w-full">
                 <h2 className="text-lg font-medium text-gray-700">
-                  Value Metric
+                  Value Metric (analysis still WIP)
                 </h2>
                 <p className="text-sm text-gray-500">
                   Define your value metric (long-term north star).
