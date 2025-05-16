@@ -34,14 +34,14 @@ export default function Tools() {
             category: "template",
             url: "https://go.gov.sg/onepagertemplate"
         },
-        {
-            id: "ai-assistant",
-            name: "One-Pager AI Writing Assistant",
-            description: "AI writing Assistant provides real-time guidance as you craft your funding proposal, offering suggestions to enhance clarity, structure, and alignment with IB/CDB requirements",
-            icon: "🔍",
-            category: "assistance",
-            url: "https://pager-app-seven.vercel.app/"
-        },
+        // {
+        //     id: "ai-assistant",
+        //     name: "One-Pager AI Writing Assistant",
+        //     description: "AI writing Assistant provides real-time guidance as you craft your funding proposal, offering suggestions to enhance clarity, structure, and alignment with IB/CDB requirements",
+        //     icon: "🔍",
+        //     category: "assistance",
+        //     url: "https://pager-app-seven.vercel.app/"
+        // },
         {
             id: "product-clinic",
             name: "Product Clinic Office Hours",
