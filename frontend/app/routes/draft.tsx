@@ -379,7 +379,7 @@ export default function Draft() {
                     Click the "Analyze" button to get feedback on your{" "}
                     {activeTab === "problem"
                       ? "problem statement"
-                      : "success metrics"}
+                      : "value metric"}
                     .
                   </p>
                 </div>
