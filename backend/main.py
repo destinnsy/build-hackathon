@@ -3,8 +3,6 @@ from pydantic import BaseModel
 import json
 from llm import analyze_problem_statement, analyze_problem_size, analyze_target_audience, summarize_problem_statement, analyze_existing_products
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
-import os
 
 app = FastAPI()
 
